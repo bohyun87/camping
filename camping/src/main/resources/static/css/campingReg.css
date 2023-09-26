@@ -1,0 +1,229 @@
+@charset "UTF-8";
+
+a {
+	cursor: hand;
+	color: #000;
+	text-decoration: none;
+	font-size: 15px;
+		
+}
+
+#member{
+	width:100%;
+	margin: 30px auto;
+	text-align: left;
+	font-size: 20px;
+	font-family: 맑은고딕;
+}
+
+.top-menu-line{
+	height : 60px;
+	line-height:60px;
+	background-color: #000;
+}
+
+.top-menu {
+	width:1200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	color: #fff;
+	font-size: 15px;
+}
+
+.top-menu div{
+	width: 1200px;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.top-main{
+	color: #fff;
+	font-size: 15px;
+}
+
+.top-main:hover{
+	text-decoration: none;
+	color: #fff;
+}
+
+#text-black-color {
+	height: 60px;
+	line-height: 60px;
+	color: #ED6D1A;
+	margin-left: 10px;
+}
+
+#title{
+	text-align: center;
+	margin: 100px auto;
+}
+
+#title h1 {
+	font-family: 맑은고딕;
+	font-weight: bolder;	
+}
+
+.titleBox{
+	 width: 80px;
+	 height: 8px;
+	 background-color: #ED6D1A;
+	 margin: 20px auto;
+}
+
+.col-center {
+	margin: 0 auto; 
+}
+
+.form-group {
+	border-bottom: 1px solid #eee;
+}
+
+.dropdown {
+	border-bottom: none;
+	display: flex;
+}
+
+.siteSellStatus {
+	height : 40px;
+	width: 120px;
+	margin: 10px 15px;
+}
+
+.dropdown p {
+	height : 60px;
+	line-height: 60px;	
+}
+
+.form-group div{
+	display: flex;	
+}
+
+.form-group div label{
+	padding: 0;
+	margin: 0;
+}
+
+.form-group div input{
+	margin: 0;
+	display: flex;
+	background-color: #eee;
+	height: 40px;
+	line-height: 40px; 
+}
+
+.form-group textarea {
+	background-color: #eee;
+}
+
+.form-group select {	
+	border-radius: 5px;
+}
+
+.fieldError {
+	display: flex;	
+}
+
+.address div{
+	display: flex;
+	justify-content: space-between;
+	padding: 0;
+}
+
+.address select{
+	width: 145px;
+	margin-right: 10px;
+	padding: 0;
+	padding-left: 5px;
+	background-color: #eee;
+	border: 1px solid #ced4da;
+	color: #6c757d;
+}
+
+.address input {
+	width: calc(100% - 145px);
+}
+
+.type_ground {
+	margin: 0;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 15px;
+}
+
+.type_ground select {
+	background-color: #eee;
+	border: 1px solid #ced4da;
+	color: #6c757d;
+}
+
+.border-none{
+	border-bottom: none;
+}
+
+.campingType {
+	width: 50%;
+	border-bottom: none;
+}
+
+.campingType .col-md-12{
+	padding: 0;	
+}
+
+.campGround {
+	width: 50%;
+	border-bottom: none;
+}
+
+.campGround .col-md-12{
+	padding: 0;	
+}
+
+.text-black{
+	color:#000; 
+	height: 40px;
+	line-height: 40px;
+}
+
+#floatingTextarea{
+	text-align: justify;
+}
+
+#campingImgFile{
+	height: 45px;
+	display: flex;
+	align-self: center;
+} 
+
+.campingDetail{
+	border: none;
+}
+
+.submit{
+	border: none;
+}
+
+.btn {
+	background-color: #ED6D1A;
+	color: #fff;
+	border: none;
+	margin-top: 20px;
+}
+
+.btn:hover {
+	background-color: #ED6D1A;
+	opacity: 0.8;
+}
+
+.btn:active {
+	background-color: #ED6D1A;
+	color: #fff;
+	border: none;
+}
+
+.btn:visited{
+	background-color: #ED6D1A;
+	color: #fff;
+	border: none;
+}

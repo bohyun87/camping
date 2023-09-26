@@ -1,0 +1,298 @@
+@charset "UTF-8";
+
+a {
+	cursor: hand;
+	color: #000;
+	text-decoration: none;
+	font-size: 15px;	
+}
+
+#member{
+	width:100%;
+	margin: 30px auto;
+	text-align: left;
+	font-size: 20px;
+	font-family: 맑은고딕;
+}
+
+.top-menu-line{
+	height : 60px;
+	line-height:60px;
+	background-color: #000;
+}
+
+.top-menu {
+	width:1200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	color: #fff;
+	font-size: 15px;
+}
+
+.top-menu div{
+	width: 1200px;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.top-main{
+	color: #fff;
+	font-size: 15px;
+}
+
+.top-main:hover{
+	text-decoration: none;
+	color: #fff;
+}
+
+.text-black{
+	color:#ED6D1A; 
+}
+
+.camping-all{
+	margin: 0 auto;
+	padding: 0;
+}
+
+.container-fluid{
+	margin: 0 auto;
+	padding: 0;
+}
+
+.whole-box{
+	margin: 0 auto;
+	padding: 0;
+}
+
+hr{
+	color: #fff;
+}
+
+.camping-repImg{
+	width: 100%;
+	height: 400px;
+	position: relative;
+	overflow: hidden;	
+}
+
+.camping-repImg .campingImg{
+	width: 100%;
+	margin-top: inherit;
+}
+
+.camping-repImg .repImg-text1{
+	position: absolute;
+	color: #fff;
+	z-index: 100;
+	top: 20%;
+	left: 20%;
+	font-size: 40px;
+	font-weight: bold;
+	text-shadow: 5px 5px 20px gray;
+}
+
+.camping-repImg .repImg-text2{
+	position: absolute;
+	color: #fff;
+	z-index: 100;
+	top: 35%;
+	left: 20%;
+	text-shadow: 10px 5px 10px gray;
+}
+
+.camping-repImg .repImg-text3{
+	width: 1000px;
+	height: 8px;
+	background-color: #FFF;
+	margin: 20px auto;
+	position: absolute;
+	z-index: 100;
+	top: 40%;
+	left: 20%;
+}
+
+.contents-wrap{
+	margin: 0 auto;	
+	margin-top: 50px;
+	margin-bottom: 100px;
+	font-size: 13.5px;
+}
+
+.contents-layout{
+	display: flex;
+}
+
+.contents{
+	display:flex;	 
+}
+
+.left {
+	min-width: 400px;
+	margin-right: 20px;
+}
+
+.right{
+	min-width: 400px;
+	margin-right: 20px;
+}
+
+hr{
+	margin: 15px 0;
+	padding: 0;
+}
+
+h5 {
+	font-weight: bold;
+}
+
+table tr{
+	height: 40px;
+}
+
+table tr th {
+	width: 110px;
+}
+
+table tr td {
+	text-align: justify;
+}
+
+.site-img img {
+	width: 385px;
+}
+
+.site-name {
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+.site-reservation{
+	margin-bottom: 40px;
+}
+
+.reset-btn{
+	float: right;
+	height: 30px;
+	line-height: 30px;	
+	background-color: #eee;
+	border: none;
+	color: #ED6D1A;
+	font-weight: bold;
+}
+
+.reservation-date{
+	height: 50px;
+	line-height: 50px;
+	background-color: #eee;
+	padding: 5px 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.reservation-date input {
+	width: 140px;
+	height: 35px;
+	line-height: 35px;
+	margin: 0;
+	margin-right: 10px;
+	background-color: transparent;
+	border-width: 0;
+}
+
+.reservation-date span{
+	font-size: 20px;
+}
+
+.reservation-box{
+	margin-top: 10px;
+}
+
+.reservation-count{
+	height: 40px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.rv_title{
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 15px;
+	font-weight: bold;
+	padding-left: 5px;
+}
+
+.subtitle{
+	width: calc(100% - 200px);
+	text-align: right;
+	padding-right: 20px;	
+	color: #aaa;
+	height: 40px;
+	line-height: 40px;
+}
+
+.count {
+	width:100px;
+	display: flex;
+	justify-content: space-between;
+	padding-right: 15px;
+	font-size: 15px;
+	height: 40px;
+	line-height: 40px;
+}
+
+.count button{
+	font-size: 20px;
+	background-color: #fff;
+	border: none;
+	
+}
+
+.count button:active{
+	border: none;
+}
+
+.result{
+	width:30px;
+	border: none;
+	text-align: center;
+}
+
+#rvOption{
+	width: calc(100% - 100px);
+	padding-left: 10px;
+}
+
+.price {
+	margin-top: 20px;
+	display: flex;
+	justify-content: flex-end;
+	font-size: 23px;
+}
+
+.reservation-btn-box{
+	width: 400px;
+	height: 50px;
+}
+
+.reservation-btn {
+	width: 400px;
+	height: 50px;
+	background-color: #ED6D1A;
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	border: none;
+	border-radius: 10px;
+	margin-top: 20px;
+}
+
+button:focus, input:focus {
+
+	  outline: none;
+
+	}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link th:href="@{https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap}" rel="stylesheet">
+<link th:href="@{https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap}" rel="stylesheet">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title>자연에빠지다: Camping</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}">
+<link rel="stylesheet" th:href="@{/css/templatemo-klassy-cafe.css}">
+<link rel="stylesheet" th:href="@{/css/owl-carousel.css}">
+<link rel="stylesheet" th:href="@{/css/lightbox.css}">
+<link rel="shortcut icon" th:href="@{/images/favicon.png}" type="">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css}" />
+<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css}" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+<link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+<link th:href="@{/css/style.css}" rel="stylesheet" />
+<link th:href="@{/css/responsive.css}" rel="stylesheet" />
+<!-- 폰트어썸 -->
+<link rel="stylesheet" th:href="@{/fontawesome-free-6.3.0-web/css/all.min.css}">
+
+
+<!-- content css 작성위치 -->
+<th:block layout:fragment="css">
+	<style>
+		
+		@font-face{
+	    font-family:'NanumGothic';
+	    src:url('fonts/Gugi-Regular.woff') format(‘woff’);
+	    font-weight: normal;
+	    font-style: normal;
+	}
+		
+	</style>
+</th:block>
+
+</head>
+<body>
+
+<div class="site-wrap">
+
+	<div th:replace="fragments/header::header"></div>
+	<div layout:fragment="content" class="content"></div>
+	<div th:replace="fragments/footer::footer"></div>
+
+</div>
+
+
+<!-- 자바스크립스 -->
+<script th:src="@{/js/jquery-2.1.0.min.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/owl-carousel.js}"></script>
+<script th:src="@{/js/accordions.js}"></script>
+<script th:src="@{/js/datepicker.js}"></script>
+<script th:src="@{/js/scrollreveal.min.js}"></script>
+<script th:src="@{/js/waypoints.min.js}"></script>
+<script th:src="@{/js/jquery.counterup.min.js}"></script>
+<script th:src="@{/js/imgfix.min.js}"></script> 
+<script th:src="@{/js/slick.js}"></script> 
+<script th:src="@{/js/lightbox.js}"></script> 
+<script th:src="@{/js/isotope.js}"></script> 
+<script th:src="@{/js/custom.js}"></script>
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js}" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js}"></script>
+<script th:src="@{https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+<!-- <script th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap}"></script> -->
+
+<!-- content 자바스크립트 작성위치 -->
+<th:block layout:fragment="script">
+</th:block>
+
+</body>
+</html>

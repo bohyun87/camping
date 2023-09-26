@@ -1,0 +1,239 @@
+@charset "UTF-8";
+
+html{
+	width: 100%;
+	margin: 0 auto;
+	padding: 0;
+}
+
+a {
+	cursor: hand;
+	color: #000;
+	text-decoration: none;
+	font-size: 15px;	
+}
+
+.top-menu-line{
+	height : 60px;
+	line-height:60px;
+	background-color: #000;
+}
+
+.top-menu {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	color: #fff;
+	font-size: 15px;
+}
+
+.top-menu div{
+	width: 1200px;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.top-main{
+	color: #fff;
+	font-size: 15px;
+}
+
+.top-main:hover{
+	text-decoration: none;
+	color: #fff;
+}
+
+.text-black{
+	color:#ED6D1A; 
+}
+
+.camping-all{
+	margin: 0 auto;
+	padding: 0;
+}
+
+.container-fluid{
+	margin: 0 auto;
+	padding: 0;
+}
+
+.whole-box{
+	margin: 0 auto;
+	padding: 0;
+}
+
+hr{
+	color: #fff;
+}
+
+.camping-repImg{
+	width: 100%;
+	height: 400px;
+	position: relative;
+	overflow: hidden;	
+}
+
+.camping-repImg .campingImg{
+	width: 100%;
+	margin-top: inherit;
+}
+
+.camping-repImg .repImg-text1{
+	position: absolute;
+	color: #fff;
+	z-index: 100;
+	top: 20%;
+	left: 20%;
+	font-size: 40px;
+	font-weight: bold;
+	text-shadow: 5px 5px 20px gray;
+}
+
+.camping-repImg .repImg-text2{
+	position: absolute;
+	color: #fff;
+	z-index: 100;
+	top: 35%;
+	left: 20%;
+	text-shadow: 10px 5px 10px gray;
+}
+
+.camping-repImg .repImg-text3{
+	width: 1000px;
+	height: 8px;
+	background-color: #FFF;
+	margin: 20px auto;
+	position: absolute;
+	z-index: 100;
+	top: 40%;
+	left: 20%;
+}
+
+.information{
+	margin: 0 auto; 
+	margin-top: 50px;
+}
+
+.information-top{
+	height: 260px;
+	margin: 0;
+	margin-bottom: 50px;
+	padding: 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.information-contents{
+	display: flex;
+	justify-content: space-between;
+}
+
+.table-imgBox{
+	height: 260px;
+}
+
+.table-imgBox table td{
+	border: none;
+	padding: 0;
+}
+
+.table-imgBox .table-img {
+	width: 190px;
+}
+
+.table-textBox{
+	display: flex;
+	align-items: center;
+	padding: 0 30px;
+}
+
+.table-textBox table {
+	font-size: 15px;
+}
+
+.table-textBox table tr{
+	height: 30px;
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;	
+}
+
+.table-textBox table tr th{
+	width: 110px;
+	padding: 8px 0;
+}
+
+.table-textBox table tr td{
+	padding: 8px 0;
+}
+
+.table-textBox table tr:nth-first-child() {
+	border-top: 3px solid #ddd;
+}
+
+.table-textBox table tr:nth-last-child() {
+	border-bottom: 3px solid #ddd;
+}
+
+.facility{
+	display: flex;
+	margin-bottom: 50px;
+}
+
+.facility h6{
+	font-weight: bold;
+	margin-bottom: 10px;
+	padding-left: 10px;
+}
+
+.facility .imgBox1 {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.facility .imgBox1 img {
+	padding: 0 50px 0 10px;
+}
+
+.camping-list{
+	margin: 0 auto;
+	margin-bottom : 50px; 
+}
+
+.list-repeat .border{
+	height: 200px;
+	display: flex;
+	align-items:center;
+	border: 1px solid #ddd;
+	margin: 15px 0;
+}
+
+.imgBox2{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.imgBox2 img{
+	width: 250px;	
+}
+
+.textBox-wrap .price {
+	display: block;
+	font-size: 15px;
+	font-weight: bold;
+	color: #ED6D1A;
+}
+
+.textBox-wrap h6 {
+	font-weight: bold;
+}
+
+.textBox-wrap button{
+	background-color: #ED6D1A;
+	color: #FFF;
+	border: none;
+	padding: 5px;
+	border-radius: 10px;	
+	margin-top: 10px;
+}

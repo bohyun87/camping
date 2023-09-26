@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+
+<!-- 각 페이지의 CSS가 작성될 위치 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" type="text/css" href="/css/campingCamping.css" />
+</th:block>
+
+<div layout:fragment="content">
+	<div id="top">
+		<div class="container-xxl">
+			<div class="row top-menu-line">
+				<div class="col-lg-12 top-menu">
+					<div>
+						<a class="top-main" href="/">자연에 빠지다</a>
+						<span class="mx-2 mb-0">/</span> 
+						<strong class="text-black">캠핑장</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="camping-all">		
+			<div class="container-xxl">
+				<div class="row">
+				
+					<div class="col-md-12 search-main">
+						<div class="col-md-4"></div>						
+						<div class="col-md-4 search-box" th:object="${itemSearchDto}">
+						
+							<h5>원하는 캠핑장이 있으세요?</h5>
+							<p>일정 선택하기</p>
+							<div class="row search">
+								<div class="row col-md-12 search-grouping">
+									<div class="dropdown region"> 
+										<select th:field="*{searchRegion}" class="form-control">
+											<option value="">지역선택</option>
+											<option value="SEOUL">서울특별시</option>
+											<option value="BUSAN">부산광역시</option>
+											<option value="INCHEON">인천광역시</option>
+											<option value="DAEGU">대구광역시</option>
+											<option value="GWANGJU">광주광역시</option>
+											<option value="DAEJEON">대전광역시</option>
+											<option value="ULSAN">울산광역시</option>
+											<option value="SEJONG">세종특별자치시</option>
+											<option value="GYEONGGIDO">경기도</option>
+											<option value="GANGWONDO">강원도</option>
+											<option value="CHUNGCHEONGNAMDO">충청남도</option>
+											<option value="CHUNGCHEONGBUKDO">충청북도</option>
+											<option value="JEOLLANAMDO">전라남도</option>
+											<option value="JEOLLABUKDO">전라북도</option>
+											<option value="GYEONGSANGNAMDO">경상남도</option>
+											<option value="GYEONGSANGBUKDO">경상북도</option>
+											<option value="JEJU">제주도</option>
+										</select>
+									</div>
+															
+									<div class="dropdown campGround">
+									  	<select th:field="*{searchCampGround}" class="form-control">
+											<option value="">테마선택</option>
+											<option value="MOUNTAIN">산</option>
+											<option value="FOREST">숲</option>
+											<option value="BEACH">해변</option>
+											<option value="RIVER">강</option>
+											<option value="ISLAND">섬</option>
+											<option value="VALLERY">계곡</option>
+											<option value="LAKE">호수</option>
+											<option value="DOWNTOWN ">도심</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-12 search-camping">
+									<div class="col-3 searchBy-box mr-4">
+										<select th:field="*{searchBy}" class="form-control">
+											<option value="campingName">캠핑장명</option>
+										</select>
+									</div>
+									<div class="search-input">
+										<input type="text" th:field="*{searchQuery}" class="form-control search-camping-name" placeholder="캠핑장명으로 검색하기">						
+									</div>
+								</div>
+								<div class="col-md-12">
+									<button id="searchBtn" type="submit" class="btn btn-primary mb-3">검색</button>							
+								</div>
+							</div>
+							
+						</div>						
+						<div class="col-md-4"></div>
+					</div>
+					
+					<!-- 캠핑장 리스트 뽑기 -->
+					<th:block th:each="camping, status: ${campings.getContent()}">
+						<div class="row col-lg-12 camping-list">					
+							<div class="col-lg-2"></div>
+							<div class="row col-lg-8">
+								<div class="list-repeat">
+									<div class="imgBox">
+										<a th:href="'/camping/' + ${camping.id}">
+											<img th:src="${camping.camImgUrl}" th:alt="${camping.campingName}" class="img-fluid campingImg">
+										</a>
+									</div>
+									<div class="textBox">
+										<a th:href="'/camping/' + ${camping.id}">
+											<section>
+												<h5 th:text="|[${camping.region.krName}]  ${camping.campingName}|">	</h5>
+												<p th:text="${camping.campingSubName}"></p>
+												<br />
+												<div class="campingDetail" th:text="${camping.campingDetail}"></div>
+												<div class="address_tel">										
+													<p th:text="${camping.address}"></p>
+													<p th:text="${camping.tel}"></p>
+												</div>
+											</section>
+										</a>
+									</div>											
+									
+								</div>	
+							</div>
+							
+							<div class="col-lg-2"></div>
+						</div>
+					</th:block>
+					
+					<div class="pageBox">   <!-- 페이징 버튼 -->
+
+						<nav th:with="start=${(campings.number / maxPage) * maxPage + 1}, 
+									  end = (${ ((campings.totalPages == 0)) ? 1 :
+									  		(start + (maxPage -1) < campings.totalPages ?
+									  			  start + (maxPage - 1) : campings.totalPages)})" 
+								aria-label="..." class="page">
+						  <ul class="pagination d-flex justify-content-center">
+						  
+						    <li class="page-item" th:classappend="${campings.first} ? 'disabled'">
+						      	<a class="page-link"
+						      		th:onclick="'javascript:page(' + ${campings.number - 1} + ')'">◀</a>
+						    </li>
+						    
+						    <li class="page-item" 
+						    	th:each="page: ${#numbers.sequence(start, end)}"   
+						    	th:classappend="${campings.number eq page -1} ? 'active' : '' ">
+						    	<a class="page-link pageNumber"
+						    		th:inline="text"
+						    		th:onclick="'javascript:page(' + ${page - 1} + ')'">
+						    		[[${page}]]
+						    	</a>   
+						    </li>
+						    
+						    <li class="page-item" th:classappend="${campings.last} ? 'disabled'">
+						   		<a class="page-link"
+						   			th:onclick="'javascript:page(' + ${campings.number + 1} + ')'">▶</a>
+						    </li>
+						    
+						  </ul>
+						</nav>
+
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	
+	
+	</div>
+
+</div>
+
+<!-- 각 페이지의 스크립트가 작성될 위치 -->
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		$(document).ready(function(){
+			$("#searchBtn").on("click", function(e){
+				e.preventDefault();
+				page(0);
+			});
+		});
+		
+		function page(page){
+			var searchRegion = $("#searchRegion").val();
+			var searchCampGround = $("#searchCampGround").val();
+			var searchBy = $("#searchBy").val();
+			var searchQuery = $("#searchQuery").val();
+			
+			location.href = "/camping/all/" + page
+						  + "?searchRegion=" + searchRegion 
+						  + "&searchCampGround=" + searchCampGround
+						  + "&searchBy=" + searchBy
+						  + "&searchQuery=" + searchQuery
+			
+		}
+		
+	</script>
+</th:block>
+</html>

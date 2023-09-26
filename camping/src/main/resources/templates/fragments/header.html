@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+	<header class="header-area header-sticky" th:fragment="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav" style="display: flex; justify-content: space-between; height: 100px;">
+                       
+						<!-- 로고 -->
+                        <a href="/" class="logo">
+                            <img src="/images/logo.png" style="height: 70px;">
+                        </a>
+                        
+                        <!-- 메뉴 -->
+                        <ul class="nav" style="display: flex; align-items: center; justify-content: left; padding-left: 50px; width: 800px;">
+                            <li class="scroll-to-section"><a href="/camping/all" style="font-family: 'Gugi', cursive;">camping</a></li>
+                            <li class="scroll-to-section"><a href="/members/qna" style="font-family: 'Gugi', cursive;">Q&A</a></li>
+                           	<li class="scroll-to-section"><a href="/reservations" sec:authorize="isAuthenticated()" style="font-family: 'Gugi', cursive;">My page</a></li>
+                            <li class="scroll-to-section"><a href="/campimg/contact" sec:authorize="isAuthenticated()" style="font-family: 'Gugi', cursive;">contact Us</a></li> 
+                            <li class="submenu" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                                <a href="javascript:;" style="font-family: 'Gugi', cursive;">admin</a>
+                                <ul>
+                                    <li><a href="/admin/camping/register" style="font-family: 'Gugi', cursive;">캠핑장 등록</a></li>
+                                    <li><a href="/admin/site/register" style="font-family: 'Gugi', cursive;">캠핑사이트 등록</a></li>
+                                    <li><a href="/admin/campings" style="font-family: 'Gugi', cursive;">제휴캠핑장 관리</a></li>
+                                </ul>
+                            </li>                                                       
+                        </ul>
+                        <ul class="nav_right nav" style="display: flex; align-items: center; justify-content: center; margin-top: 33px;">
+							<li class="scroll-to-section"><a href="/members/login" sec:authorize="isAnonymous()" style="font-family: 'Gugi', cursive;">login</a></li>                            
+                            <li class="scroll-to-section"><a href="/members/logout" sec:authorize="isAuthenticated()"  style="font-family: 'Gugi', cursive;">logout</a></li>
+                            <li class="scroll-to-section" sec:authorize="isAuthenticated()">
+	                            <a href="/cart" style="display: flex; align-items: center; padding-left: 20px;">
+	                            	<i class="fa-solid fa-cart-shopping" style="color: #120e0e;"></i>
+	                            </a>
+                            </li> 
+                        </ul>
+                        
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+</html>

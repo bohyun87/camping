@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+	
+<head>
+	<meta name="_csrf" th:content="${_csrf.token}" />
+	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+</head>
+
+<!-- 각 페이지의 CSS가 작성될 위치 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" type="text/css" href="/css/campingReservation.css" />
+</th:block>
+
+<div layout:fragment="content">
+	<div id="top">
+		<div class="container-xxl">
+			<div class="row top-menu-line">
+				<div class="col-lg-12 top-menu">
+				<div class="col-lg-2"></div>
+					<div class="col-lg-8">
+						<a class="top-main" href="/">자연에 빠지다</a>
+						<span class="mx-2 mb-0">/</span> 
+						<strong class="text-black">예약하기</strong>
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="camping-all">		
+			<div class="container-fluid">
+				<div class="row whole-box">
+					
+					<div class="col-lg-12 camping-repImg">
+						<div>
+							<img th:src="${camping.campingImgDtoList[0].camImgUrl}" th:alt="${camping.campingName}" class="img-fluid campingImg">							
+							<span class="repImg-text1" th:text="${camping.campingName}"></span>
+							<span class="repImg-text2" th:text="${camping.campingSubName}"></span>
+							<span class="repImg-text3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						</div>
+					</div>
+	
+
+					
+					<div class="row contents-wrap">
+						<div class="container-xxl contents-layout" >
+													
+
+							<div class="col-lg-12 contents">
+								
+								<div class="left">
+									<div class="site-img">
+										<img th:alt="${site.siteName}" th:src="${site.siteImgDtoList[0].siteImgUrl}">
+									</div>
+								
+									<div class="site-name">
+										<h5 th:text="${site.siteName}">사이트명</h5>
+										<p th:text="${site.person}">기준인원</p>
+										<hr width="350px">
+										<table>
+											<tr>
+												<th>성수기</th>
+												<td th:text="${site.peakSeason}"></td>
+											</tr>
+											<tr>
+												<th>비성수기</th>
+												<td th:text="${site.offSeason}"></td>
+											</tr>
+										</table>
+									</div>
+								
+									<div class="site-refund">
+										<h5>환불규정</h5>
+										<p>입실일 기준</p>
+										<hr width="350px">
+										<table>
+											<tr>
+												<th>7일전</th>
+												<td th:text="${site.sevenDaysAgo}"></td>
+											</tr>
+											<tr>
+												<th>5일전</th>
+												<td th:text="${site.fiveDaysAgo}"></td>
+											</tr>
+											<tr>
+												<th>3일전</th>
+												<td th:text="${site.threeDaysAgo}"></td>
+											</tr>
+											<tr>
+												<th>2일전</th>
+												<td th:text="${site.twoDaysAgo}"></td>
+											</tr>
+											<tr>
+												<th>1일전</th>
+												<td th:text="${site.oneDaysAgo}"></td>
+											</tr>
+										</table>
+									</div>
+								
+								</div>
+								
+						
+								<div class="right">
+							
+									<div class="site-reservation">
+										<input type="hidden" id="campingId" name="campingId" th:value="${camping.id}">
+										<input type="hidden" id="siteId" name="siteId" th:value="${site.id}">
+										
+										
+										<h5>예약정보</h5>
+										<div class="reservation-date">
+											<input type="date" class="rvCheckinDate rv_date" id="rvCheckinDate" name="rvCheckinDate" onkeyup="data()">
+											<span>-</span>
+											<input type="date" class="rvCheckoutDate rv_date" id="rvCheckoutDate" name="rvCheckoutDate" onkeyup="data()">
+											<button class="reset-btn" type="reset">변경</button>
+										</div>
+										
+										<div class="reservation-box">
+											
+											<div class="reservation-count">
+												<div class="rv_title">예약수량</div>
+												<div class="subtitle"></div>
+												<div class="count rv">
+													<button type="button" class="minus rv-count">-</button>
+													<input class="result" id="rvCount" name="rvCount"
+														placeholder="" value="1">
+													<button type="button" class="plus rv-count">+</button>
+												</div>
+											</div>
+											
+											<div class="reservation-count">
+												<div class="rv_title">예약인원</div>
+												<div class="subtitle">성인</div>
+												<div class="count rvAdult">
+													<button type="button" class="minus rv_button">-</button>
+													<input class="result" id="rvAdultCount" name="rvAdultCount"
+														placeholder="" value="0">
+													<button type="button" class="plus rv_button">+</button>
+												</div>
+											</div>
+											
+											<div class="reservation-count">
+												<div class="rv_title"></div>
+												<div class="subtitle">소인</div>
+												<div class="count rvChild">
+													<button type="button" class="minus rv_button">-</button>
+													<input class="result" id="rvChildCount" name="rvChildCount"
+														placeholder="" value="0">
+													<button type="button" class="plus rv_button">+</button>
+												</div>
+											</div>
+											
+											<div class="reservation-count">
+												<div class="rv_title">예약차량</div>
+												<div class="subtitle"></div>
+												<div class="count rvCar">
+													<button type="button" class="minus rv_button">-</button>
+													<input class="result" id="rvCarCount" name="rvCarCount"
+														placeholder="" value="0">
+													<button type="button" class="plus rv_button">+</button>
+												</div>
+											</div>
+											
+											<div class="reservation-count">
+												<div class="rv_title">옵션신청</div>
+												<input type="text" id="rvOption" name="rvOption" class="rv_option"   onkeyup="data()"												
+														placeholder="추가 요청사항을 입력하세요.">
+											</div>
+											
+											<div class="price">
+												<input type="hidden" th:value="${site.price}" id="price" name="price">
+												<strong id="totalPrice"></strong>
+											</div>
+											
+										</div>
+										<div class="reservation-btn-box" th:if="${#strings.equals(site.siteSellStatus, 'SELL')}">
+											<button type="button" class="reservation-btn" id="reservation-btn" onclick="reserve()">실시간 예약신청</button>
+										</div>
+										<div class="reservation-btn-box" th:unless="${#strings.equals(site.siteSellStatus, 'SELL')}">
+											해당 상품은 예약할 수 없습니다.
+										</div>
+									</div>
+								
+									<div class="site-information">
+										<h5>이용안내</h5>
+										<hr width="350px">
+											<table>
+												<tr>
+													<th>특징</th>
+													<td th:text="${site.person}"></td>
+												</tr>
+												<tr>
+													<th>정보</th>
+													<td th:text="${site.information}"></td>
+												</tr>
+												<tr>
+													<th>객실유형</th>
+													<td th:text="${site.roomType}"></td>
+												</tr>
+												<tr>
+													<th>객실전망</th>
+													<td th:text="${site.roomView}"></td>
+												</tr>
+												<tr>
+													<th>구비품목</th>
+													<td th:text="${site.requiredItem}"></td>
+												</tr>
+												<tr>
+													<th>입.퇴실시간</th>
+													<td th:text="|${site.checkInTime} / ${site.checkOutTime}|"></td>
+												</tr>
+												<tr>
+													<th>매너타임</th>
+													<td th:text="${site.mannerTime}"></td>
+												</tr>
+											</table>
+										<hr width="350px">
+									</div>
+							
+								</div>
+								
+							</div>
+							
+						
+						</div>
+						
+					</div>
+					
+				
+				</div>
+			</div>
+		</div>
+	
+	
+	</div>
+
+</div>
+
+<!-- 각 페이지의 스크립트가 작성될 위치 -->
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+	
+	$(document).ready(function(){
+		
+		calculateTotalPrice(); 			
+		
+		$(".rv-count").click(function(){
+			calculateTotalPrice(); 
+		})
+		
+		$(".rv_button").click(function(){
+			data();
+		})
+		
+	});
+	
+	//데이터구하기
+	function data(){
+		var date = document.querySelector('input[type="date"]').value;		
+		var rvAdultCount = $("#rvAdultCount").val();
+		var rvChildCount = $("#rvChildCount").val();
+		var rvCarCount = $("#rvCarCount").val();
+		var rvOption = document.getElementById('rvOption').value;
+	}
+	
+	
+	//총 가격 계산하기
+	function calculateTotalPrice(){
+		var count = $("#rvCount").val();
+		var price = $("#price").val();
+		var totalPrice = (price * count).toLocaleString('ko-KR');
+		$("#totalPrice").html(totalPrice + '원');
+	}
+	
+	//예약하기
+	function reserve(){
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		var url = "/reservation";		
+		
+		var paramData = { 
+				campingId : $("#campingId").val(),
+				siteId : $("#siteId").val(),  
+				rvCount : $("#rvCount").val(),
+				rvAdultCount : $("#rvAdultCount").val(),
+				rvChildCount : $("#rvChildCount").val(),
+				rvCarCount : $("#rvCarCount").val(),
+				rvOption : $("#rvOption").val(),
+				rvCheckinDate : $("#rvCheckinDate").val(),
+				rvCheckoutDate : $("#rvCheckoutDate").val()
+				
+		}
+		
+		var param = JSON.stringify(paramData);
+		
+		$.ajax({
+			url : url,   	
+			type : "POST",  
+			contentType : "application/json",
+			data : param, 
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader(header, token)
+			},
+			dataType : "json",
+			cache : false,
+			success : function(result, status) {
+				alert("예약이 완료되었습니다." + result);
+			},
+			error : function(jqXHR, status, error) {
+				if(jqXHR.status == '401'){
+					alert('로그인 후 이용해주세요.')
+					location.href = '/members/login';
+				} else {
+					alert(jqXHR.responseText);   
+				}
+			}
+		});
+	}
+	
+		
+	//예약수량 옵션
+	$('.rv :button').on({
+	    'click' : function(e){
+	        e.preventDefault();
+	        var $count = $(this).parent('.count').find('.result');
+	        var now = parseInt($count.val());
+	        var min = 1;
+	        var max = 5;
+	        var num = now;
+	        if($(this).hasClass('minus')){
+	            var type = 'm';
+	        }else{
+	            var type = 'p';
+	        }
+	        if(type=='m'){
+	            if(now>min){
+	                num = now - 1;
+	            }
+	        }else{
+	            if(now<max){
+	                num = now + 1;
+	            }
+	        }
+	        if(num != now){
+	            $count.val(num);
+	        }
+	    }
+	});
+	
+	//성인인원 옵션
+	$('.rvAdult :button').on({
+	    'click' : function(e){
+	        e.preventDefault();
+	        var $count = $(this).parent('.rvAdult').find('.result');
+	        var now = parseInt($count.val());
+	        var min = 1;
+	        var max = 4;
+	        var num = now;
+	        if($(this).hasClass('minus')){
+	            var type = 'm';
+	        }else{
+	            var type = 'p';
+	        }
+	        if(type=='m'){
+	            if(now>min){
+	                num = now - 1;
+	            }
+	        }else{
+	            if(now<max){
+	                num = now + 1;
+	            }
+	        }
+	        if(num != now){
+	            $count.val(num);
+	        }
+	    }
+	});
+	
+	//소인인원 옵션
+	$('.rvChild :button').on({
+	    'click' : function(e){
+	        e.preventDefault();
+	        var $count = $(this).parent('.rvChild').find('.result');
+	        var now = parseInt($count.val());
+	        var min = 1;
+	        var max = 3;
+	        var num = now;
+	        if($(this).hasClass('minus')){
+	            var type = 'm';
+	        }else{
+	            var type = 'p';
+	        }
+	        if(type=='m'){
+	            if(now>min){
+	                num = now - 1;
+	            }
+	        }else{
+	            if(now<max){
+	                num = now + 1;
+	            }
+	        }
+	        if(num != now){
+	            $count.val(num);
+	        }
+	    }
+	});
+	
+	//차량 옵션
+	$('.rvCar :button').on({
+	    'click' : function(e){
+	        e.preventDefault();
+	        var $count = $(this).parent('.rvCar').find('.result');
+	        var now = parseInt($count.val());
+	        var min = 1;
+	        var max = 2;
+	        var num = now;
+	        if($(this).hasClass('minus')){
+	            var type = 'm';
+	        }else{
+	            var type = 'p';
+	        }
+	        if(type=='m'){
+	            if(now>min){
+	                num = now - 1;
+	            }
+	        }else{
+	            if(now<max){
+	                num = now + 1;
+	            }
+	        }
+	        if(num != now){
+	            $count.val(num);
+	        }
+	    }
+	});
+	
+
+	</script>
+</th:block>
+</html>

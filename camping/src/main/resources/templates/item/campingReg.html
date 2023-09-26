@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+
+<!-- 각 페이지의 CSS가 작성될 위치 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" type="text/css" href="/css/campingReg.css" />
+</th:block>
+
+<div layout:fragment="content">
+	<div id="top">
+		<div class="container-xxl">
+			<div class="row top-menu-line">
+				<div class="col-lg-12 top-menu">
+					<div>
+						<a class="top-main" href="/">자연에 빠지다</a>
+						<span class="mx-2 mb-0">/</span> 
+						<strong class="text-black" id="text-black-color">캠핑장 등록</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div id="title">
+			<h1>캠핑장 등록</h1>
+			<div class="titleBox">&nbsp;</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="p-3 p-lg-5 border">
+					<div class="col-center">
+						<form role="form" action="/admin/camping/register" method="post" enctype="multipart/form-data" 
+							th:object="${campingFormDto}" name="campingFormDto">
+			
+							<input type="hidden" th:field="*{id}" />
+			
+							<div class="form-group row dropdown">
+								<div>
+									<select class="form-select siteSellStatus" th:field="*{siteSellStatus}">
+										<option value="">제휴상태</option>
+										<option value="SELL">제휴 중</option>
+										<option value="SOLD_OUT">제휴종료</option>
+									</select>
+								</div>								
+								<p th:if="${#fields.hasErrors('siteSellStatus')}" th:errors="*{siteSellStatus}" class="fieldError1">Incorrect Data</p>
+							</div>
+			
+							<div class="form-group row">
+								<div class="col-md-12">
+									<label th:for="campingName" class="text-black col-md-2">캠핑장명</label>
+									<input type="text" class="form-control col-md-10" th:field="*{campingName}" placeholder="캠핑장명 입력">
+								</div>
+								<div class="fieldError col-md-12">
+									<p class="col-md-2"></p>
+									<p th:if="${#fields.hasErrors('campingName')}" th:errors="*{campingName}" class="fieldError1 col-md-10">Incorrect Data</p>
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<div class="col-md-12">
+									<label th:for="campingSubName" class="text-black col-md-2">부제목</label>
+									<input type="text" class="form-control col-md-10" th:field="*{campingSubName}" placeholder="부제목 입력">
+								</div>
+								<div class="fieldError col-md-12">
+									<p class="col-md-2"></p>
+									<p th:if="${#fields.hasErrors('campingSubName')}" th:errors="*{campingSubName}" class="fieldError1 col-md-10">Incorrect Data</p>
+								</div>
+							</div>
+			
+							<div class="form-group row">
+								<div class="col-md-12 address">
+									<label class="text-black col-md-2">주소</label>
+									<div class="col-md-10">
+										<select class="form-select" th:field="*{region}">
+											<option value="SEOUL">서울특별시</option>
+											<option value="BUSAN">부산광역시</option>
+											<option value="INCHEON">인천광역시</option>
+											<option value="DAEGU">대구광역시</option>
+											<option value="GWANGJU">광주광역시</option>
+											<option value="DAEJEON">대전광역시</option>
+											<option value="ULSAN">울산광역시</option>
+											<option value="SEJONG">세종특별자치시</option>
+											<option value="GYEONGGIDO">경기도</option>
+											<option value="GANGWONDO">강원도</option>
+											<option value="CHUNGCHEONGNAMDO">충청남도</option>
+											<option value="CHUNGCHEONGBUKDO">충청북도</option>
+											<option value="JEOLLANAMDO">전라남도</option>
+											<option value="JEOLLABUKDO">전라북도</option>
+											<option value="GYEONGSANGNAMDO">경상남도</option>
+											<option value="GYEONGSANGBUKDO">경상북도</option>
+											<option value="JEJU">제주도</option>
+										</select>			
+										<input type="text" class="form-control" th:field="*{address}" placeholder="주소 입력">
+									</div>			
+								</div>
+								<div class="fieldError col-md-12">
+									<p class="col-md-2"></p>
+									<p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="fieldError1 col-md-10">Incorrect Data</p>
+								</div>
+							</div>
+			
+							<div class="form-group row">
+								<div class="col-md-12">
+									<label th:for="tel" class="text-black col-md-2">문의처</label> 
+									<input type="text" class="form-control col-md-10" th:field="*{tel}" placeholder="문의처 입력">
+								</div>
+								<div class="fieldError col-md-12">
+									<p class="col-md-2"></p>
+									<p th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}" class="fieldError1 col-md-10">Incorrect Data</p>
+								</div>
+							</div>
+							
+							<div class="form-group row type_ground">
+								<div class="row campingType">
+									<div class="col-md-12">
+										<label th:for="campingType" class="text-black col-md-4">캠핑장 유형</label> 
+										<select class="form-select col-md-8" th:field="*{campingType}">
+											<option value="">캠핑장 유형 선택</option>
+											<option value="GENERAL">일반캠핑장</option>
+											<option value="CAR">자동차캠핑장</option>
+											<option value="GLAMPING">글램핑</option>
+											<option value="CARAVAN">카라반</option>
+										</select>
+									</div>
+									<div class="fieldError col-md-12">
+										<p class="col-md-4"></p>
+										<p th:if="${#fields.hasErrors('campingType')}" th:errors="*{campingType}" class="fieldError1 col-md-8">Incorrect Data</p>
+									</div>
+								</div>
+								
+								
+								<div class=" row campGround">
+									<div class="col-md-12">
+										<label th:for="campGround" class="text-black col-md-4">캠핑장 환경</label> 
+										<select class="form-select col-md-8" th:field="*{campGround}">
+											<option value="">캠핑장 환경 선택</option>
+											<option value="MOUNTAIN">산</option>
+											<option value="FOREST">숲</option>
+											<option value="BEACH">해변</option>
+											<option value="RIVER">강</option>
+											<option value="ISLAND">섬</option>
+											<option value="VALLERY">계곡</option>
+											<option value="LAKE">호수</option>
+											<option value="DOWNTOWN">도심</option>
+										</select>
+									</div>
+									<div class="fieldError col-md-12">
+										<p class="col-md-4"></p>
+										<p th:if="${#fields.hasErrors('campGround')}" th:errors="*{campGround}" class="fieldError1 col-md-8">Incorrect Data</p>
+									</div>
+								</div>
+							</div>
+							
+							<div class="form-group row border-none"></div>
+							
+							<div class="form-group row">
+								<div class="col-md-12">
+									<label th:for="operation" class="text-black col-md-2">운영기간</label> 
+									<input type="text" class="form-control col-md-10" th:field="*{operation}" placeholder="운영기간 입력">
+								</div>
+								<div class="fieldError col-md-12">
+									<p class="col-md-2"></p>
+									<p th:if="${#fields.hasErrors('operation')}" th:errors="*{operation}" class="fieldError1 col-md-10">Incorrect Data</p>
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<div class="col-md-12">
+									<label th:for="surrounding" class="text-black col-md-2">주변이용가능 시설</label> 
+									<input type="text" class="form-control col-md-10" th:field="*{surrounding}" placeholder="주변이용가능 시설 입력">
+								</div>
+								<div class="fieldError col-md-12">
+									<p class="col-md-2"></p>
+									<p th:if="${#fields.hasErrors('surrounding')}" th:errors="*{surrounding}" class="fieldError2 col-md-10">Incorrect Data</p>
+								</div>
+							</div>
+										
+							<div class="form-group row campingDetail">
+								<div class="col-md-12">
+									<label th:for="campingDetail" class="text-black col-md-2">캠핑장 상세내용</label> 
+									<textarea rows=10 class="form-control col-md-10" th:field="*{campingDetail}" placeholder="캠핑장 상세내용" id="floatingTextarea"></textarea>
+								</div>
+								<div class="fieldError col-md-12">
+									<p class="col-md-2"></p>
+			                        <p th:if="${#fields.hasErrors('campingDetail')}" th:errors="*{campingDetail}" class="fieldError2 col-md-10">Incorrect Data</p>
+			                    </div>
+							</div>
+										
+							<div th:each="num: ${#numbers.sequence(1,10)}">
+								<div class="mb-3">
+	 								<label for="campingImgFile" class="form-label" th:text="상품이미지 + ${num}"></label>
+									<input class="form-control" type="file" id="campingImgFile" name="campingImgFile" >
+								</div>
+							</div>			
+			
+							<div class="form-group submit">
+								<div class="col-md-12 d-flex justify-content-center">
+									<button type="button" onclick="submit()" class="btn btn-primary mb-3" style="width:150px;">캠핑장등록</button>
+								</div>
+							</div>
+										
+							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+		
+	
+	</div>
+
+</div>
+
+<!-- 각 페이지의 스크립트가 작성될 위치 -->
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		$(document).ready(function(){
+			
+			var errorMessage = [[${errorMessage}]];
+			if(errorMessage != null){
+				alert(errorMessage);
+			}
+			bindDomEvent();
+		
+		});
+		
+		function bindDomEvent(){
+			$(".custom-file-input").on("chand", function(){
+				var fileName = $(this).val().split("\\").pop();
+				var fileExt = fileName.substring(fileName.lastIndexof(".") + 1);
+				fileExt = fileExt.toLowerCase();
+				
+				if(fileExt != "jpg" && fileExt != "jpeg" && fileExt != "gif" && fileExt != "png" && fileExt != "bmp"){
+					alert("이미지 파일만 등록이 가능합니다.");
+					return;
+				}
+				$(this).siblings(".custom-file-label").html(fileName);
+			});
+		}
+		
+			
+	</script>
+</th:block>
+</html>

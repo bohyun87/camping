@@ -1,0 +1,183 @@
+	<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+
+<head>
+	<meta name="_csrf" th:content="${_csrf.token}" />
+	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+</head>
+
+<!-- 각 페이지의 CSS가 작성될 위치 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" type="text/css" href="/css/campingList.css" />
+</th:block>
+
+<div layout:fragment="content">
+	<div id="top">
+		<div class="container-xxl">
+			<div class="row top-menu-line">
+				<div class="col-lg-12 top-menu">
+					<div class="col-lg-2"></div>
+					<div class="col-lg-8">
+						<a class="top-main" href="/">자연에 빠지다</a>
+						<span class="mx-2 mb-0">/</span> 
+						<strong class="text-black">캠핑장</strong>
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="camping-all">		
+			<div class="container-fluid">
+				<div class="row whole-box">
+					
+					<div class="col-lg-12 camping-repImg">
+						<div >
+							<img th:src="${camping.campingImgDtoList[0].camImgUrl}" th:alt="${camping.campingName}" class="img-fluid campingImg">							
+							<span class="repImg-text1" th:text="${camping.campingName}"></span>
+							<span class="repImg-text2" th:text="${camping.campingSubName}"></span>
+							<span class="repImg-text3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						</div>
+					</div>
+						
+					<div class="information container-fluid">	
+						<div class="row col-lg-12 information-top">
+							<div class="col-lg-3"></div>
+							<div class="col-lg-7 information-contents">
+								<div class="col-lg-6 table-imgBox">
+									<table>
+										<tr>
+											<td>
+												<img th:src="${camping.campingImgDtoList[0].camImgUrl}" th:alt="${camping.campingName}" class="table-img">							
+											</td>
+											<td>
+												<img th:src="${camping.campingImgDtoList[1].camImgUrl}" th:alt="${camping.campingName}" class="table-img">							
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<img th:src="${camping.campingImgDtoList[2].camImgUrl}" th:alt="${camping.campingName}" class="table-img">							
+											</td>
+											<td>
+												<img th:src="${camping.campingImgDtoList[3].camImgUrl}" th:alt="${camping.campingName}" class="table-img">							
+											</td>
+										</tr>
+									</table>
+								</div>
+								
+
+								
+								<div class="col-lg-6 table-textBox">
+									<table>
+										<tr>
+											<th>주소</th>
+											<td th:text="${camping.address}"></td>
+										</tr>										
+										<tr>
+											<th>문의처</th>
+											<td th:text="${camping.tel}"></td>
+										</tr>										
+										<tr>
+											<th>캠핑장유형</th>
+											<td th:text="${camping.campingType.krName}"></td>
+										</tr>										
+										<tr>
+											<th>캠핑장환경</th>
+											<td th:text="${camping.campGround.krName}"></td>
+										</tr>										
+										<tr>
+											<th>운영기간</th>
+											<td th:text="${camping.operation}"></td>
+										</tr>										
+										<tr>
+											<th>주변시설</th>
+											<td th:text="${camping.surrounding}"></td>
+										</tr>										
+									</table>
+								</div>
+							</div>
+							<div class="col-lg-2"></div>
+						</div>
+					
+					</div>
+												
+						
+					<div class="facility container-fluid">
+						<div class="col-lg-3"></div>
+						<div class="col-lg-6">
+							<h6>시설 / 환경</h6>
+							<div class="imgBox1">
+								<img th:src="${camping.campingImgDtoList[4].camImgUrl}" th:alt="${camping.campingName}" class="img-fluid campingImg">
+							</div>								
+						</div>
+						<div class="col-lg-3"></div>
+					</div>
+						
+						<!-- 사이트 출력부분  -->
+						
+					<div class="col-lg-12 camping-list">
+						<th:block th:each="site, status: ${sites}">
+						
+							<div class="row list-repeat">
+								<div class="col-lg-4"></div>
+								
+								<div class="col-lg-4 border">
+									<div class="imgBox2 col-md-6">
+										<a th:href="'/camping/reservation/camping=' + ${camping.id} + '/site=' + ${site.id}">
+											<img th:alt="${site.siteName}" th:src="${site.siteImgDtoList[0].siteImgUrl}" class="img-fluid siteImg">
+										</a>
+									</div>
+									<div class="textBox-wrap col-md-6">
+										<h6 th:text="${site.siteName}" class="site_name"></h6>
+										<p th:text="|${site.checkInTime} / ${site.checkOutTime}|"></p>
+										<p class="price">[[${#numbers.formatInteger(site.price, 3, 'COMMA')}]]원</h6>
+										<br/>
+										<a th:href="'/camping/reservation/camping=' + ${camping.id} + '/site=' + ${site.id}">
+											<button>예약하기</button>
+										</a>
+										<!-- <img alt="" src=""> -->
+									</div>												
+								</div>	
+												
+								<div class="col-lg-4"></div>
+							</div>
+						
+						</th:block>	
+					</div>
+					<!-- 사이트출력 끝 -->
+						
+				</div>
+					
+			</div>
+		</div>
+	</div>	
+	
+	
+</div>
+	
+
+
+<!-- 각 페이지의 스크립트가 작성될 위치 -->
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		
+	//천단위 콤마찍는 함수
+	 function inputNumberFormat(obj) {
+			  let value = obj.value;
+			  value = Number(value.replaceAll(',', '')); //콤마가 있으면 없애준다.
+			  
+			  if(isNaN(value)) { //숫자가 아니면 0으로 바꾼다
+				// 가격은 숫자가 들어와야 되기때문에 숫자가 아니면 price input 창의 값을 0 으로 바꾼다.
+				  obj.value = 0;
+			  }else {
+				//숫자면 콤마(,) 를 붙여준다.
+			    const formatValue = value.toLocaleString('ko-KR');
+			    obj.value = formatValue;
+			  }
+		 }
+	
+	</script>
+</th:block>
+</html>

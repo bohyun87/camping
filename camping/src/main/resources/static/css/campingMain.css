@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+.Modern-Slider{
+	height: 700px;
+	overflow: hidden;
+}
+
+.sec-about{
+	margin: 20px auto;
+	height: 450px;
+}
+		
+.about-text{
+	font-size: 13px;
+}
+	
+.about-logo{
+	font-size: 20px;
+	font-weight: bold;
+}
+				
+.imgwrap{
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+		
+.img-content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+		
+.about-img{
+	width: 600px;
+	height: 200px;
+	display: flex;
+	justify-content: space-around;
+}
+		
+.about-img .img1 img{
+	height: 200px;	
+}
+		
+.about-img .img2 img{
+	height: 200px;
+}
+
+#menu{
+	margin: 0;
+}
+
+.camping-back-img{
+	width: 285px;
+}
+
+.info {
+	width: 285px;
+	height: 250px;
+}
+
+.info .title {	
+ 	overflow: hidden;
+ 	white-space: nowrap;
+  	text-overflow: ellipsis;
+  	word-break: break-all;
+}
+
+.info .description{
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

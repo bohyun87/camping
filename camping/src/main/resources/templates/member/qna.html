@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+
+<!-- 각 페이지의 CSS가 작성될 위치 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" type="text/css" href="/css/campingQnA.css" />
+</th:block>
+
+<div layout:fragment="content">
+	<div id="top">
+		<div class="container-xxl">
+			<div class="row top-menu-line">
+				<div class="col-lg-12 top-menu">
+					<div>
+						<a class="top-main" href="/">자연에 빠지다</a>
+						<span class="mx-2 mb-0">/</span> 
+						<strong class="text-black">문의하기</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div id="title">
+			<h1>문의하기</h1>
+			<div class="titleBox">&nbsp;</div>
+		</div>
+	
+	
+	</div>
+
+</div>
+
+<!-- 각 페이지의 스크립트가 작성될 위치 -->
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+	</script>
+</th:block> 
+</html>

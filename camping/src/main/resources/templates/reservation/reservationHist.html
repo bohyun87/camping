@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+
+<head>
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+</head>
+
+<!-- 각 페이지의 CSS가 작성될 위치 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" type="text/css" href="/css/campingOrderHist.css" />
+</th:block>
+
+<div layout:fragment="content">
+	<div id="top">
+		<div class="container-xxl">
+			<div class="row top-menu-line">
+				<div class="col-lg-12 top-menu">
+					<div>
+						<a class="top-main" href="/">자연에 빠지다</a>
+						<span class="mx-2 mb-0">/</span> 
+						<strong class="text-black">마이페이지</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div id="title">
+			<h1>마이페이지</h1>
+			<div class="titleBox">&nbsp;</div>
+		</div>
+	
+		<div th:each="rv: ${reservations.getContent()}" class="container">  <!-- 주문목록 -->
+					
+			<div class="d-flex mb-3 align-self-center">
+				<th:block th:if="${#strings.equals(rv.reservationStatus, 'STANDBY')}">
+					<h6 style="font-size: 18px;" th:text="|예약상태 : 예약승인대기|" class="reservationStatus"></h6>
+				</th:block>
+				<th:block th:if="${#strings.equals(rv.reservationStatus, 'RESERVATION')}">
+					<h6 style="font-size: 18px;" th:text="|예약상태 : 예약완료|" class="reservationStatus"></h6>
+				</th:block>
+				<th:block th:if="${#strings.equals(rv.reservationStatus, 'CANCEL')}">
+					<h6 style="font-size: 18px;" class="reservationStatus">예약 취소완료</h6>  <!-- 주문날짜, 주문상태 -->
+				</th:block>
+			</div>
+			<div class="d-flex flex-row rvItem-wrap">
+				<div th:each="rvItem : ${rv.reservationItemDtoList}" class="d-flex mb-3 rvItem-box">
+					<div class="repImgDiv">
+						<img class="rounded repImg"  th:src="${rvItem.camImgUrl}" th:alt="${rvItem.campingName}">
+					</div>
+					<div class="align-self-center w-75 rvItem-detail">
+						<!-- 상품명 위치 -->
+						<p th:text="|${rvItem.campingName}/${rvItem.siteName}|"  class="font-weight-bold" style="font-size: 18px; color: black;"></p> 
+						<br />
+						<div class="fs18 font-weight-light"> 
+							<span th:text="|예약일 : ${rvItem.rvCheckinDate} - ${rvItem.rvCheckoutDate}|"></span> /
+							<!-- ↓ 상품가격 -->
+							<span th:text="${#numbers.formatInteger(rvItem.price, 0, 'COMMA')} + '원'"></span>  
+						</div>
+						<p th:text="|추가요청사항 : ${rvItem.rvOption}|" class="rvoption"></p> 
+					</div>
+				</div>
+				<div class="reservation-cancel">
+					<th:block th:if="${#strings.equals(rv.reservationStatus, 'STANDBY')}">
+						<button type="button" class="btn btn-outline-secondary rvCancel-btn" th:value="${rv.reservationId}" onclick="cancelReservation(this.value)"> 주문취소</button>
+					</th:block>
+					<th:block th:if="${#strings.equals(rv.reservationStatus, 'RESERVATION')}">
+						<button type="button" class="btn btn-outline-secondary rvCancel-btn" th:value="${rv.reservationId}" onclick="cancelReservation(this.value)"> 주문취소</button>
+					</th:block>
+					<th:block th:if="${#strings.equals(rv.reservationStatus, 'CANCEL')}">
+						<p>
+							<button type="button" class="btn btn-primary delete-btn" th:value="${rv.reservationId}" onclick="deleteReservation(this.value)"> 삭제하기</button>
+						</p>
+					</th:block>
+				</div>
+			</div>
+		
+		</div>
+			
+		<div class="page">   <!-- 페이징 버튼 -->
+
+			<nav th:with="start=${(reservations.number / maxPage) * maxPage + 1}, 
+						  end = (${ ((reservations.totalPages == 0)) ? 1 : 
+						  (start + (maxPage -1) < reservations.totalPages ? start + (maxPage - 1) : 
+						  reservations.totalPages)})" aria-label="...">
+							
+			  <ul class="pagination d-flex justify-content-center">
+						  
+			    <li class="page-item" th:classappend="${reservations.first} ? 'disabled'">
+			      	<a class="page-link" th:href="@{'/reservations/' + ${reservations.number - 1}}">◀</a>  
+			    </li>
+				    
+			    <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${reservations.number eq page -1} ? 'active' : '' ">
+			    	<a class="page-link" th:inline="text" th:href="@{'/reservations/' + ${page - 1}}">[[${page}]]</a>
+		    	</li>
+						    
+			    <li class="page-item" th:classappend="${reservations.last} ? 'disabled'">
+			   		<a class="page-link" th:href="@{'/reservations/' + ${reservations.number + 1}}">▶</a>  
+			    </li>
+				    
+			  </ul>
+			</nav>
+		</div>	
+	
+	</div>
+
+</div>
+
+<!-- 각 페이지의 스크립트가 작성될 위치 -->
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+	
+	function cancelReservation(rvId){
+		const cancelConf = confirm("주문 취소하시겠습니까?");			
+		if(!cancelConf) return;
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		var url = "/reservations/" + rvId + "/cancel";
+		
+		var paramData = {
+				reservationId : rvId
+		};
+		var param = JSON.stringify(paramData);
+		
+		$.ajax({
+			url : url, 
+			type : "POST", 
+			contentType : "application/json",
+			data : param,
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader(header, token)
+			},
+			dataType : "json",
+			cache : false,
+			success : function(result, status) {
+				
+				var path = location.pathname;
+				var page = path.substring(path.lastIndexOf("/") + 1);
+				
+				if(page == 'reservations'){
+					page = o;
+				}
+				
+				location.href = '/reservations/' + page;
+			},
+			error : function(jqXHR, status, error) {
+				if(jqXHR.status == '401'){
+					alert('로그인 후 이용해주세요.')
+					location.href = '/members/login';
+				} else {
+					alert(jqXHR.responseText);   
+				}
+			}
+		});
+		
+	}
+	
+	function deleteReservation(rvId){
+		const deleteConf = confirm("삭제하시겠습니까?");			
+		if(!deleteConf) return; 
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		var url = "/reservations/" + rvId + "/delete";
+		
+		$.ajax({
+			url : url,  
+			type : "DELETE", 
+			contentType : "application/json",
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader(header, token)
+			},
+			dataType : "json",
+			cache : false,
+			success : function(result, status) {
+				location.href = '/reservations';
+			},
+			error : function(jqXHR, status, error) {
+				if(jqXHR.status == '401'){
+					alert('로그인 후 이용해주세요.')
+					location.href = '/members/login';
+				} else {
+					alert(jqXHR.responseText);   
+				}
+			}
+		});
+	}
+	
+	</script>
+</th:block>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+
+<!-- 각 페이지의 CSS가 작성될 위치 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" type="text/css" href="/css/campingItemMng.css" />
+</th:block>
+
+<div layout:fragment="content">
+	<div id="top">
+		<div class="container-xxl">
+			<div class="row top-menu-line">
+				<div class="col-lg-12 top-menu">
+					<div>
+						<a class="top-main" href="/">자연에 빠지다</a>
+						<span class="mx-2 mb-0">/</span> 
+						<strong class="text-black">제휴캠핑장 관리</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div id="title">
+			<h1>제휴캠핑장 관리</h1>
+			<div class="titleBox">&nbsp;</div>
+		</div>
+	
+		<div class="site-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<form th:action="@{'/admin/campings/' + ${campings.number}}" method="get" th:object="${campings}">
+						<!-- 관리데이터 -->
+						<table class="table table-responsive-md ">
+						  <thead>
+						    <tr>
+						      <th scope="col">id</th>
+						      <th scope="col" colspan="2">상품명</th>
+						      <th scope="col">지역</th>
+						      <th scope="col">캠핑장환경</th>
+						      <th scope="col">캠핑장유형</th>
+						      <th scope="col">상태</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						  <!-- 조회된 데이터를 출력한다. -->
+						    <tr th:each="camping, status: ${campings.getContent()}">
+						      <th class="campingId" th:text="${camping.id}" scope="row"></th>
+						      <td>
+								  <a th:href="'/admin/camping/' + ${camping.id}" class="product-item md-height bg-gray d-block">
+									  <img th:src="${camping.camImgUrl}" th:alt="${camping.campingName}" class="img-fluid campingMngImg">
+								  </a>
+							  </td>
+						      <td>
+						      	<a th:href="'/admin/camping/' + ${camping.id}" th:text="${camping.campingName}"></a>
+						      </td>
+						      <td th:text="${camping.region.krName}"></td>
+						      <td th:text="${camping.campGround.krName}"></td>
+						      <td th:text="${camping.campingType.krName}"></td>
+						      <td th:text="${camping.siteSellStatus.krName}"></td>
+						    </tr>						    
+						  </tbody>
+						</table>
+						
+
+						<nav th:with="start=${(campings.number / maxPage) * maxPage + 1}, 
+									  end = (${ ((campings.totalPages == 0)) ? 1 :
+									  		(start + (maxPage -1) < campings.totalPages ?
+									  			  start + (maxPage - 1) : campings.totalPages)})" 
+						aria-label="..." class="page">
+						  <ul class="pagination d-flex justify-content-center">
+						  
+						    <li class="page-item" th:classappend="${campings.first} ? 'disabled'">
+						      	<a class="page-link"
+						      		th:onclick="'javascript:page(' + ${campings.number - 1} + ')'">◀</a>
+						    </li>
+						    
+						    <li class="page-item" 
+						    	th:each="page: ${#numbers.sequence(start, end)}"   
+						    	th:classappend="${campings.number eq page -1} ? 'active' : '' ">
+						    	<a class="page-link pageNumber"
+						    		th:inline="text"
+						    		th:onclick="'javascript:page(' + ${page - 1} + ')'">
+						    		[[${page}]]
+						    	</a>   
+						    </li>
+						    
+						    <li class="page-item" th:classappend="${campings.last} ? 'disabled'">
+						   		<a class="page-link"
+						   			th:onclick="'javascript:page(' + ${campings.number + 1} + ')'">▶</a>
+						    </li>
+						    
+						  </ul>
+						</nav>
+						
+						<div class="row search" th:object="${itemSearchDto}" style="height:40px;">
+							<div class="col-lg-1"></div>
+							<div class="col-lg-7 select" style="display:flex;">
+								<!-- 상품판매 상태 -->
+								<select th:field="*{searchSiteSellStatus}" class="form-control siteSellStatus">
+									<option value="">제휴상태</option>
+									<option value="SELL">제휴중</option>
+									<option value="SOLD_OUT">제휴종료</option>
+								</select>
+								<!-- 캠핑환경 -->
+								<select th:field="*{searchCampGround}" class="form-control campGround">
+									<option value="">캠핑환경</option>
+									<option value="MOUNTAIN">산</option>
+									<option value="FOREST">숲</option>
+									<option value="BEACH">해변</option>
+									<option value="RIVER">강</option>
+									<option value="ISLAND">섬</option>
+									<option value="VALLERY">계곡</option>
+									<option value="LAKE">호수</option>
+									<option value="DOWNTOWN ">도심</option>
+								</select>
+								<!-- 캠핑유형 -->
+								<select th:field="*{searchCampingType}" class="form-control campingType">
+									<option value="">캠핑유형</option>
+									<option value="GENERAL">일반캠핑장</option>
+									<option value="CAR">자동차캠핑장</option>
+									<option value="GLAMPING">글램핑</option>
+									<option value="CARAVAN">카라반</option>
+								</select>
+								<!-- 상품명, 등록자 선택 -->
+								<select th:field="*{searchRegion}" class="form-control region">
+									<option value="">지역</option>
+									<option value="SEOUL">서울특별시</option>
+									<option value="BUSAN">부산광역시</option>
+									<option value="INCHEON">인천광역시</option>
+									<option value="DAEGU">대구광역시</option>
+									<option value="GWANGJU">광주광역시</option>
+									<option value="DAEJEON">대전광역시</option>
+									<option value="ULSAN">울산광역시</option>
+									<option value="SEJONG">세종특별자치시</option>
+									<option value="GYEONGGIDO">경기도</option>
+									<option value="GANGWONDO">강원도</option>
+									<option value="CHUNGCHEONGNAMDO">충청남도</option>
+									<option value="CHUNGCHEONGBUKDO">충청북도</option>
+									<option value="JEOLLANAMDO">전라남도</option>
+									<option value="JEOLLABUKDO">전라북도</option>
+									<option value="GYEONGSANGNAMDO">경상남도</option>
+									<option value="GYEONGSANGBUKDO">경상북도</option>
+									<option value="JEJU">제주도</option>
+								</select>
+								<!-- 상품명, 등록자 선택 -->
+								<select th:field="*{searchBy}" class="form-control camping_address">
+									<option value="">선택</option>
+									<option value="campingName">캠핑장명</option>
+									<option value="address">주소</option>
+								</select>	
+							</div>
+
+							<div class="col-lg-3">
+								<div style="display:flex;">
+									<input type="text" class="form-control" 
+											th:field="*{searchQuery}" placeholder="검색어 입력">
+									<button id="searchBtn" type="submit" class="btn btn-primary mb-3">검색</button>							
+								</div>
+							</div>
+							<div class="col-lg-1"></div>
+						</div>						
+					
+					
+					</form>		
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	</div>
+
+</div>
+
+<!-- 각 페이지의 스크립트가 작성될 위치 -->
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		
+		$(document).ready(function(){
+			$("#searchBtn").on("click", function(e){
+				e.preventDefault();
+				page(0);
+			});
+		});
+		
+		function page(page){
+			
+			var searchCampingType = $("#searchCampingType").val();
+			var searchSiteSellStatus = $("#searchSiteSellStatus").val();
+			var searchAddress = $("#searchAddress").val();
+			var searchQuery = $("#searchQuery").val();
+			
+			location.href = "/admin/camping/" + page 
+						  + "?searchCampingType=" + searchCampingType
+						  + "&searchSiteSellStatus=" + searchSiteSellStatus
+						  + "&searchAddress=" + searchAddress
+						  + "&searchQuery=" +searchQuery
+			
+		}
+		
+	</script>
+</th:block>
+</html>

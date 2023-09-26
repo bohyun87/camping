@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout1}">
+
+<th:block layout:fragment="css">
+	<link rel="stylesheet" type="text/css" href="/css/campingMain.css" />
+</th:block>
+
+<div layout:fragment="content">
+
+	<!-- 이미지슬라이드 시작 -->
+    <div id="top">
+        <div class="container-xxl" style="padding: 0;">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="main-banner header-text">
+                        <div class="Modern-Slider">
+                          <!-- slide 1 -->
+                          <div class="item">
+                            <div class="img-fill">
+                                <img src="/images/imgslide3.jpg" style="margin-top: -170px;" alt="이미지1">
+                            </div>
+                          </div>
+                          <!-- // slide 1 -->
+                          <!-- slide 2 -->
+                          <div class="item">
+                            <div class="img-fill">
+                                <img src="/images/imgslide5.jpg" alt="이미지2">
+                            </div>
+                          </div>
+                          <!-- // slide 2 -->
+                          <!-- slide 3 -->
+                          <div class="item">
+                            <div class="img-fill">
+                                <img src="/images/imgslide4.jpg" alt="이미지3">
+                            </div>
+                          </div>
+                          <!-- // slide 3 -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="left-content" style="background-color: #ED6D1A;">
+                        <div class="inner-content" style="text-align: center;">
+                            <h4 style="font-family: 'Gugi', cursive; width: 360px; ">자연에빠지다</h4>
+                            <h6>healing</h6>
+                            <div class="main-white-button scroll-to-section">
+                                <a href="/camping/all" >more camping</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 이미지슬라이드 끝 -->
+    
+    <!-- ABOUT US 시작 -->
+    <section class="section sec-about" id="about" style="padding: 50px 0;">
+        <div class="container">
+            <div class="row">
+            	<div class="col-lg-1"></div>
+                <div class="col-lg-4">
+                    <div class="left-text-content">
+                        <div class="section-heading">
+                            <h6 style="font-size: 25px; font-weight: bold; font-family: 'Gugi', cursive;">About Us</h6>
+                        </div>
+                        <p class="about-text"><br />
+							캠핑은 자연입니다. <br />
+							자연과 함께하고 싶습니다. <br />
+							캠핑은 사랑입니다. <br />
+							연인 가족과 함께하고 싶습니다. <br />
+							캠핑은 힐링입니다. <br />
+							지친 몸과 마음을 힐링하고 싶습니다.
+							<br />
+							<br />
+							<span class="about-logo" style="font-family: 'Gugi', cursive;">자연에빠지다</span> 는<br />
+							국내 최대 캠핑장 정보 <br />
+							전국 <strong>2,500여개</strong> 의 캠핑장 제공
+						</p>                        
+                    </div>
+                </div>
+                <div class="col-lg-7 imgwrap">
+                    <div class="right-content img-content" style="margin: 0;">
+                        <div class="thumb about-img">
+                        	<div class="img1">
+                            	<img alt="이미지" src="/images/imgslide1.jpg">
+                        	</div>
+                        	<div class="img2">
+                            	<img alt="이미지" src="/images/village_img1.jpg">
+                        	</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+    <!-- ABOUT US 끝 -->
+    
+    <!-- Let's go Camping 시작 -->
+    <section class="section" id="menu">
+        <div class="container">
+            <div class="row">
+				<div class="col-lg-1"></div>
+                <div class="col-lg-4">
+                    <div class="section-heading">
+                        <h6 style="font-family: 'Gugi', cursive; font-size: 25px; font-weight: bold;">Let's go camping</h6>
+                    </div>
+                </div>
+                 <div class="col-lg-7"></div>
+            </div>
+        </div>
+        <div class="menu-item-carousel">
+            <div class="col-lg-12">
+                <div class="owl-menu-item owl-carousel">
+					
+					<th:block th:each="camping, status : ${campings}">
+                    <div class="item">
+                        <div class="card card1 camping-back-img" th:style=" 'background-image: url(' + ${camping.camImgUrl} + ');'">
+                            <div class="info">
+                              <h1 class="title" style="font-family: 'Gugi', cursive; font-weight: 400; " th:text="${camping.campingName}">Chocolate Cake</h1>
+                              <p class="description" th:text="${camping.campingSubName}"></p>
+                              <div class="main-text-button">
+                                  <div class="scroll-to-section"><a th:href="'/camping/' + ${camping.id}">more <i class="fa fa-angle-down"></i></a></div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    </th:block>  
+                                      
+                </div>
+            </div>
+        </div>
+    </section>			    
+			
+    <!-- Let's go Camping 끝 -->
+</div>		
+
+<th:block layout:fragment="script">
+</th:block>
+
+</html>

@@ -1,0 +1,171 @@
+@charset "UTF-8";
+
+a {
+	cursor: hand;
+	color: #000;
+	text-decoration: none;
+	font-size: 15px;	
+}
+
+
+#member{
+	width:100%;
+	margin: 30px auto;
+	text-align: left;
+	font-size: 20px;
+	font-family: 맑은고딕;
+}
+
+.top-menu-line{
+	height : 60px;
+	line-height:60px;
+	background-color: #000;
+}
+
+.top-menu {
+	width:1200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	color: #fff;
+	font-size: 15px;
+}
+
+.top-menu div{
+	width: 1200px;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.top-main{
+	color: #fff;
+	font-size: 15px;
+}
+
+.top-main:hover{
+	text-decoration: none;
+	color: #fff;
+}
+
+.text-black{
+	color:#ED6D1A; 
+}
+
+#title{
+	text-align: center;
+	margin: 100px auto;
+}
+
+#title h1 {
+	font-family: 맑은고딕;
+	font-weight: bolder;	
+}
+
+.titleBox{
+	 width: 80px;
+	 height: 8px;
+	 background-color: #ED6D1A;
+	 margin: 20px auto;
+}
+
+.table {
+	width: 1000px;
+	margin: 0 auto;
+	margin-bottom: 30px;
+	border-bottom: 1px solid #eee; 
+}
+
+.table tbody{
+	border-top: none;
+}
+
+.table th{
+	text-align: center; 
+}
+
+tbody th{
+	height: 100px;
+	line-height: 100px;
+}
+
+.table td{
+	height: 100px;
+	line-height:100px;
+	text-align: center; 
+}
+
+.campingMngImg{
+	width:150px;}
+
+.page{
+	margin-bottom: 30px;
+}
+
+.page-item.active .page-link{
+	background-color: #000;
+	border-color: #000;
+	cursor: hand;	
+}
+
+.page-item.active .page-link:hover{
+	color: #fff;	
+}
+
+.search {
+	margin-bottom: 50px;
+}
+
+.search div{
+	height: 40px;
+}
+
+.select{	
+	display: flex;
+	justify-content: space-between;
+	padding: 0;
+}
+
+.search .siteSellStatus {
+	width: 130px;
+}
+
+.search .campGround {
+	width: 125px;
+	margin-left: 10px;
+}
+
+.search .campingType {
+	width: 175px;
+	margin-left: 10px;
+}
+
+.search .region {
+	width: 190px;
+	margin-left: 10px;
+}
+
+.search .camping_address{
+	width: 130px;
+	margin-left: 10px;
+}
+
+.btn{
+	width:100px;
+	height: 40px;
+	line-height: 40px;
+	background-color: #ED6D1A;
+	border: none;
+	padding: 0;
+	margin-left: 10px; 
+}
+
+.btn:hover{
+	background-color: #ED6D1A;
+	border: none;
+}
+
+
+
+
+

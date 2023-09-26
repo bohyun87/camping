@@ -1,0 +1,191 @@
+@charset "UTF-8";
+
+a {
+	cursor: hand;
+	color: #000;
+	text-decoration: none;
+	font-size: 15px;	
+}
+
+#member{
+	width:100%;
+	margin: 30px auto;
+	text-align: left;
+	font-size: 20px;
+	font-family: 맑은고딕;
+}
+
+.top-menu-line{
+	height : 60px;
+	line-height:60px;
+	background-color: #000;
+}
+
+.top-menu {
+	width:1200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	color: #fff;
+	font-size: 15px;
+}
+
+.top-menu div{
+	width: 1200px;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.top-main{
+	color: #fff;
+	font-size: 15px;
+}
+
+.top-main:hover{
+	text-decoration: none;
+	color: #fff;
+}
+
+.text-black{
+	color:#ED6D1A; 
+}
+
+.search-main{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 50px; 
+	margin-bottom: 50px;
+}
+
+.search-box {
+	height: 100%;	
+	border: 1px solid #eee;
+	border-radius: 10px; 
+	padding: 30px;
+}
+
+.search-box h5{
+	font-weight: bold;
+}
+
+.search div{
+	margin: 5px 0;
+}
+
+.search-camping{
+	display: flex;
+}
+
+.search button {
+	width: 100%;
+	background-color: #fff;
+	color: #000;
+	border : 1px solid #ddd;
+}
+
+.search button:hover{
+	background-color: #fff;
+	color: #000;
+}
+
+.search button:focus{
+	background-color: #fff;
+	color: #000;
+}
+
+.search button:active{
+	background-color: #fff;
+	color: #000;
+}
+
+.search-grouping {
+	display: flex;
+	justify-content: space-between;
+}
+
+.search-grouping .dropdown {
+	width: 48%;
+	padding: 0;
+	background-color: #fff;
+}
+
+.search-grouping .dropdown .region{
+	margin-right: 10px;
+}
+
+.searchBy-box{
+	padding: 0;
+}
+
+.search-input{
+	width: 100%;	
+}
+
+.search-camping-name {
+	background-color: #eee;
+}
+
+.search-camping-name::placeholder {
+	text-align: center;
+}
+
+#searchBtn{
+	background-color: #ED6D1A;
+	border: none;
+	color: #fff;
+	font-weight: bold;
+}
+
+.list-repeat{
+	border-bottom: 1px solid #eee;
+	padding: 25px;
+	display: flex;
+	align-items: center;
+	margin: 0 auto;
+}
+.imgBox {
+	width: 250px;
+	margin-right: 20px;
+}
+
+.textBox {
+	width: 800px;
+}
+.campingImg{
+	width: 300px;
+}
+
+.campingDetail{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.address_tel{
+	display: flex;
+}
+
+.address_tel p{
+	margin-bottom: 0;
+	margin-right: 20px;
+}
+
+.pageBox{
+	margin: 30px auto;
+	
+}
+
+.page-item.active .page-link{
+	background-color: #000;
+	border-color: #000;
+}
+
+.page-item.active .page-link:hover{
+	text-decoration: none;	
+}
+
+
+
+

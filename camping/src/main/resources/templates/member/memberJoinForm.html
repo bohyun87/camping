@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}">
+
+<!-- 각 페이지의 CSS가 작성될 위치 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" type="text/css" href="/css/campingMemberJoin.css" />
+	
+</th:block>
+
+<div layout:fragment="content">
+	<div id="top">
+		<div class="container-xxl">
+			<div class="row top-menu-line">
+				<div class="col-lg-12 top-menu">
+					<div>
+						<a class="top-main" href="/">자연에 빠지다</a>
+						<span class="mx-2 mb-0">/</span> 
+						<strong class="text-black">회원가입</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div id="title">
+			<h1>회원가입</h1>
+			<div class="titleBox">&nbsp;</div>
+		</div>
+		
+		<div class="container-xxl">
+			<div class="row login-wrap">
+				<div class="col-lg-12">
+					<form role="form" id="form" action="/members/join" method="post" th:object="${memberFormDto}">
+						<div class="join-box">
+							<div class="join-text-box">
+								<div class="join-text-box-aligncenter">
+									<div class="join-form-wrap">
+										<label th:for="name" class="join-label">이름</label>
+										<input type="text" placeholder="이름을 입력해주세요" th:field="*{name}" />
+									</div>
+										<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect Data</p>
+									<div class="join-form-wrap">
+										<label th:for="email" class="join-label">아이디</label>
+										<input type="email" placeholder="이메일을 입력해주세요" th:field="*{email}" />
+									</div>
+										<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect Data</p>
+									<div class="join-form-wrap">
+										<label th:for="password" class="join-label">비밀번호</label>
+										<input type="password" placeholder="비밀번호를 입력해주세요" th:field="*{password}" />
+									</div>
+										<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect Data</p>
+									<div class="join-form-wrap">
+										<label th:for="phone" class="join-label">전화번호</label>
+										<input type="text" placeholder="전화번호를 입력해주세요" th:field="*{phone}" />
+									</div>
+										<p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="fieldError">Incorrect Data</p>
+									<div class="join-form-wrap">
+										<label th:for="area" class="join-label">희망지역</label>
+										<input type="text" placeholder="희망지역을 입력해주세요" th:field="*{area}" />
+									</div>
+									<div class="join-form-wrap checkbox">
+										<label th:for="interest" class="join-label">관심사</label>
+										<div class="checkbox-interest">
+											<div th:each="interest: ${interests}" class="form-check">
+												<input type="radio" th:field="*{interests}" th:value="${interest.key}" class="form-check-input">
+												<label th:for="${#ids.prev('interests')}" class="form-check-label" th:text="${interest.value}"></label>
+											</div>
+										</div>
+									</div>									
+								</div>
+							</div>
+							
+							<div class="join-img">
+								<img alt="이미지" src="/images/imgslide5.jpg">
+							</div>
+							
+						</div>
+						<div class="btn-box">
+							<button type="submit" class="btn join-btn">회원가입</button>
+						</div>
+						
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+					</form>
+				</div>
+				
+			</div>
+		</div>
+	
+	
+	</div>
+
+</div>
+
+<!-- 각 페이지의 스크립트가 작성될 위치 -->
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+	var errorMessage = [[${errorMessage}]];
+	
+	if(errorMessage != null){
+		alert(errorMessage);
+	}
+
+	</script>
+</th:block>     
+</html>
