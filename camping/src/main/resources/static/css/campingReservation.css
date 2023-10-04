@@ -75,6 +75,7 @@ hr{
 	height: 400px;
 	position: relative;
 	overflow: hidden;	
+	padding: 0;
 }
 
 .camping-repImg .campingImg{

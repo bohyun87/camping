@@ -186,6 +186,15 @@ a {
 	text-decoration: none;	
 }
 
+.pagination .page-item.active .page-link{
+	color: #fff;
+	background-color: #ED6D1A;
+	border-color: #ED6D1A;
+}
+
+.pagination .page-item:hover .page-link {
+	cursor: pointer;
+}
 
 
 

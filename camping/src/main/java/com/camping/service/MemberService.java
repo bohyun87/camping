@@ -56,5 +56,7 @@ public class MemberService implements UserDetailsService{
 		Member saveMember = memberRepository.save(member);
 		return saveMember;
 	}
+	
+	
 
 }

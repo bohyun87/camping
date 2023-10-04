@@ -67,3 +67,25 @@ a {
 	 background-color: #ED6D1A;
 	 margin: 20px auto;
 }
+
+.file-button{
+	height: 42px;
+}
+
+.contact-btn-wrap{
+	margin-top: 50px;
+}
+
+.contact-btn-wrap .contact-btn{
+	margin: 0 !important;
+	background-color: #ED6D1A;
+	border: none;
+}
+
+.contact-btn-wrap .contact-btn:active {
+	background-color: #ED6D1A !important;
+	outline: none;
+	box-shadow: none;
+}
+
+

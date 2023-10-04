@@ -72,7 +72,7 @@ public class CampingRepositoryCustomImpl implements CampingRepositoryCustom{
 		return null;
 	}
 	
-	//관리페이지
+	//캠핑장 관리페이지
 	@Override
 	public Page<CampingListDto> getAdminMngPage(ItemSearchDto itemSearchDto, Pageable pageable) {
 		

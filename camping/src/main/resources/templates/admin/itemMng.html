@@ -64,37 +64,7 @@
 						  </tbody>
 						</table>
 						
-
-						<nav th:with="start=${(campings.number / maxPage) * maxPage + 1}, 
-									  end = (${ ((campings.totalPages == 0)) ? 1 :
-									  		(start + (maxPage -1) < campings.totalPages ?
-									  			  start + (maxPage - 1) : campings.totalPages)})" 
-						aria-label="..." class="page">
-						  <ul class="pagination d-flex justify-content-center">
-						  
-						    <li class="page-item" th:classappend="${campings.first} ? 'disabled'">
-						      	<a class="page-link"
-						      		th:onclick="'javascript:page(' + ${campings.number - 1} + ')'">◀</a>
-						    </li>
-						    
-						    <li class="page-item" 
-						    	th:each="page: ${#numbers.sequence(start, end)}"   
-						    	th:classappend="${campings.number eq page -1} ? 'active' : '' ">
-						    	<a class="page-link pageNumber"
-						    		th:inline="text"
-						    		th:onclick="'javascript:page(' + ${page - 1} + ')'">
-						    		[[${page}]]
-						    	</a>   
-						    </li>
-						    
-						    <li class="page-item" th:classappend="${campings.last} ? 'disabled'">
-						   		<a class="page-link"
-						   			th:onclick="'javascript:page(' + ${campings.number + 1} + ')'">▶</a>
-						    </li>
-						    
-						  </ul>
-						</nav>
-						
+						<!-- 검색 -->
 						<div class="row search" th:object="${itemSearchDto}" style="height:40px;">
 							<div class="col-lg-1"></div>
 							<div class="col-lg-7 select" style="display:flex;">
@@ -147,9 +117,8 @@
 								</select>
 								<!-- 상품명, 등록자 선택 -->
 								<select th:field="*{searchBy}" class="form-control camping_address">
-									<option value="">선택</option>
+									<option value="">검색선택</option>
 									<option value="campingName">캠핑장명</option>
-									<option value="address">주소</option>
 								</select>	
 							</div>
 
@@ -163,6 +132,36 @@
 							<div class="col-lg-1"></div>
 						</div>						
 					
+						<!-- 페이징 -->
+						<nav th:with="start=${(campings.number / maxPage) * maxPage + 1}, 
+									  end = (${ ((campings.totalPages == 0)) ? 1 :
+									  		(start + (maxPage -1) < campings.totalPages ?
+									  			  start + (maxPage - 1) : campings.totalPages)})" 
+						aria-label="..." class="page">
+						  <ul class="pagination d-flex justify-content-center">
+						  
+						    <li class="page-item" th:classappend="${campings.first} ? 'disabled'">
+						      	<a class="page-link"
+						      		th:onclick="'javascript:page(' + ${campings.number - 1} + ')'">◀</a>
+						    </li>
+						    
+						    <li class="page-item" 
+						    	th:each="page: ${#numbers.sequence(start, end)}"   
+						    	th:classappend="${campings.number eq page -1} ? 'active' : '' ">
+						    	<a class="page-link pageNumber"
+						    		th:inline="text"
+						    		th:onclick="'javascript:page(' + ${page - 1} + ')'">
+						    		[[${page}]]
+						    	</a>   
+						    </li>
+						    
+						    <li class="page-item" th:classappend="${campings.last} ? 'disabled'">
+						   		<a class="page-link"
+						   			th:onclick="'javascript:page(' + ${campings.number + 1} + ')'">▶</a>
+						    </li>
+						    
+						  </ul>
+						</nav>
 					
 					</form>		
 				</div>
@@ -188,14 +187,17 @@
 		function page(page){
 			
 			var searchCampingType = $("#searchCampingType").val();
+			var searchCampGround = $("#searchCampGround").val();
 			var searchSiteSellStatus = $("#searchSiteSellStatus").val();
+			var searchRegion = $("#searchRegion").val();
 			var searchAddress = $("#searchAddress").val();
 			var searchQuery = $("#searchQuery").val();
 			
-			location.href = "/admin/camping/" + page 
+			location.href = "/admin/campings/" + page 
 						  + "?searchCampingType=" + searchCampingType
+						  + "&searchCampGround=" + searchCampGround
 						  + "&searchSiteSellStatus=" + searchSiteSellStatus
-						  + "&searchAddress=" + searchAddress
+						  + "&searchRegion=" + searchRegion
 						  + "&searchQuery=" +searchQuery
 			
 		}

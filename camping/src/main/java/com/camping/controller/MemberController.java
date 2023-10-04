@@ -29,9 +29,9 @@ public class MemberController {
 	private final PasswordEncoder passwordEncoder;
 	
 	//문의하기
-	@GetMapping(value = "/members/qna")
+	@GetMapping(value = "/qna")
 	public String qna() {
-		return "member/qna";
+		return "qna/qna";
 	}	
 	
 	//로그인화면

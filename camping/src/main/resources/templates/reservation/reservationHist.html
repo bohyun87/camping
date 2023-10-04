@@ -32,7 +32,7 @@
 			<div class="titleBox">&nbsp;</div>
 		</div>
 	
-		<div th:each="rv: ${reservations.getContent()}" class="container">  <!-- 주문목록 -->
+		<div th:each="rv: ${reservations.getContent()}" class="container hist-box">  <!-- 주문목록 -->
 					
 			<div class="d-flex mb-3 align-self-center">
 				<th:block th:if="${#strings.equals(rv.reservationStatus, 'STANDBY')}">
@@ -59,7 +59,7 @@
 							<!-- ↓ 상품가격 -->
 							<span th:text="${#numbers.formatInteger(rvItem.price, 0, 'COMMA')} + '원'"></span>  
 						</div>
-						<p th:text="|추가요청사항 : ${rvItem.rvOption}|" class="rvoption"></p> 
+						<p  th:if="${not #strings.isEmpty(rvItem.rvOption)}" th:text="|추가요청사항 : ${rvItem.rvOption}|" class="rvoption"></p> 
 					</div>
 				</div>
 				<div class="reservation-cancel">
@@ -80,28 +80,27 @@
 		</div>
 			
 		<div class="page">   <!-- 페이징 버튼 -->
-
 			<nav th:with="start=${(reservations.number / maxPage) * maxPage + 1}, 
-						  end = (${ ((reservations.totalPages == 0)) ? 1 : 
-						  (start + (maxPage -1) < reservations.totalPages ? start + (maxPage - 1) : 
-						  reservations.totalPages)})" aria-label="...">
-							
-			  <ul class="pagination d-flex justify-content-center">
-						  
-			    <li class="page-item" th:classappend="${reservations.first} ? 'disabled'">
-			      	<a class="page-link" th:href="@{'/reservations/' + ${reservations.number - 1}}">◀</a>  
-			    </li>
-				    
-			    <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${reservations.number eq page -1} ? 'active' : '' ">
-			    	<a class="page-link" th:inline="text" th:href="@{'/reservations/' + ${page - 1}}">[[${page}]]</a>
-		    	</li>
-						    
-			    <li class="page-item" th:classappend="${reservations.last} ? 'disabled'">
-			   		<a class="page-link" th:href="@{'/reservations/' + ${reservations.number + 1}}">▶</a>  
-			    </li>
-				    
-			  </ul>
+						  end = (${ ((reservations.totalPages == 0)) ? 1 :	(start + (maxPage -1) < reservations.totalPages ?
+							  start + (maxPage - 1) : reservations.totalPages)})" aria-label="...">
+				<ul class="pagination d-flex justify-content-center">
+			
+					<li class="page-item " th:classappend="${reservations.first} ? 'disabled'">
+						<a class="page-link page-item" th:onclick="'javascript:page(' + ${reservations.number - 1} + ')'">이전</a>
+					</li>
+			
+					<li class="page-item" th:each="page: ${#numbers.sequence(start, end)}"
+						th:classappend="${reservations.number eq page -1} ? 'active' : '' ">
+						<a class="page-link page-number" th:inline="text" th:onclick="'javascript:page(' + ${page - 1} + ')'">
+							[[${page}]] </a>
+					</li>
+			
+					<li class="page-item" th:classappend="${reservations.last} ? 'disabled'"><a class="page-link page-item"
+							th:onclick="'javascript:page(' + ${reservations.number + 1} + ')'">다음</a>
+					</li>
+				</ul>
 			</nav>
+			
 		</div>	
 	
 	</div>
@@ -111,6 +110,10 @@
 <!-- 각 페이지의 스크립트가 작성될 위치 -->
 <th:block layout:fragment="script">
 	<script th:inline="javascript">
+		
+		$(document).ready(function(){
+			
+		});
 	
 	function cancelReservation(rvId){
 		const cancelConf = confirm("주문 취소하시겠습니까?");			

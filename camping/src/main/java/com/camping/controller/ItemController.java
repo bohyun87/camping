@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,13 +19,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.camping.auth.PrincipalDetails;
 import com.camping.dto.AvailableDateDto;
 import com.camping.dto.CampingFormDto;
 import com.camping.dto.CampingListDto;
+import com.camping.dto.ContactSearchDto;
+import com.camping.dto.ContactUsDto;
 import com.camping.dto.ItemSearchDto;
 import com.camping.dto.SiteDto;
 import com.camping.entity.Camping;
+import com.camping.entity.ContactUs;
 import com.camping.service.CampingService;
+import com.camping.service.ContactUsService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +40,7 @@ import lombok.RequiredArgsConstructor;
 public class ItemController {
 
 	private final CampingService campingService;
+	private final ContactUsService contactUsService;
 	
 	//전체 캠핑장 리스트
 	@GetMapping(value = {"/camping/all", "/camping/all/{page}"})
@@ -83,7 +90,7 @@ public class ItemController {
 	@GetMapping(value = "/admin/camping/register")
 	public String campingReg(Model model) {
 		model.addAttribute("campingFormDto", new CampingFormDto());
-		return "item/campingReg";
+		return "admin/campingReg";
 	} 
 	
 	//캠핑장 등록 메소드
@@ -92,12 +99,12 @@ public class ItemController {
 			@RequestParam("campingImgFile") List<MultipartFile> campingImgFileList) {
 		
 		if(bindingResult.hasErrors()) {
-			return "item/campingReg";
+			return "admin/campingReg";
 		}	
 		
 		if(campingImgFileList.get(0).isEmpty()) {
 			model.addAttribute("errorMessage", "첫번째 이미지는 필수 입력입니다.");
-			return "item/campingReg";			
+			return "admin/campingReg";			
 		}
 		
 		try {
@@ -105,7 +112,7 @@ public class ItemController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", "상품등록 중 에러가 발생했습니다.");
-			return "item/campingReg";
+			return "admin/campingReg";
 		}
 		return "redirect:/";
 	}
@@ -117,7 +124,7 @@ public class ItemController {
 		
 		model.addAttribute("siteDto", new SiteDto());
 		model.addAttribute("listCamping", listCamping);
-		return "item/siteReg";
+		return "admin/siteReg";
 	} 
 	
 	//사이트 등록 메소드
@@ -126,12 +133,12 @@ public class ItemController {
 			@RequestParam("siteImgFile") List<MultipartFile> siteImgFileList) {
 		
 		if(bindingResult.hasErrors()) {
-			return "item/siteReg";
+			return "admin/siteReg";
 		}	
 		
 		if(siteImgFileList.get(0).isEmpty()) {
 			model.addAttribute("errorMessage", "첫번째 이미지는 필수 입력입니다.");
-			return "item/siteReg";			
+			return "admin/siteReg";			
 		}
 		
 		try {
@@ -139,7 +146,7 @@ public class ItemController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", "상품등록 중 에러가 발생했습니다.");
-			return "item/siteReg";
+			return "admin/siteReg";
 		}
 		return "redirect:/";
 	}
@@ -159,7 +166,7 @@ public class ItemController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
-		return "item/itemMng";
+		return "admin/itemMng";
 	} 
 	
 	//캠핑장 수정페이지 보여주기
@@ -175,10 +182,10 @@ public class ItemController {
 			
 			model.addAttribute("campingFormDto", new CampingFormDto());
 			
-			return "item/campingReg";
+			return "admin/campingReg";
 		}
 		
-		return "item/campingModifyForm";
+		return "admin/campingModifyForm";
 		
 	}
 	
@@ -197,12 +204,12 @@ public class ItemController {
 				BindingResult bindingResult, @RequestParam("campingImgFile") List<MultipartFile> campingImgFileList) {
 		
 		if(bindingResult.hasErrors()) {
-			return "item/campingReg";
+			return "admin/campingReg";
 		}
 		
 		if(campingImgFileList.get(0).isEmpty() && campingFormDto.getId() == null) {
 			model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수입력입니다.");
-			return "item/campingReg";
+			return "admin/campingReg";
 		}
 		
 		try {
@@ -210,7 +217,7 @@ public class ItemController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("errorMessage", "상품 수정 중 에러가 발생했습니다.");
-			return "item/campingReg";
+			return "admin/campingReg";
 		}
 		return "redirect:/";
 		
@@ -222,9 +229,72 @@ public class ItemController {
 		if(!campingService.validate)
 	}
 	*/
-	//제휴문의 페이지
-	@GetMapping(value = "/campimg/contact")
-	public String itemContactUs() {
+	
+	//제휴문의 페이지 보여주기
+	@GetMapping(value = {"/camping/contact", "/camping/contact/{page}"})
+	public String itemContactUsList(Model model, @PathVariable("page") Optional<Integer> page) {
+
+		try {
+			Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+			Page<ContactUs> contactUsList = contactUsService.getItemContactUsList(pageable);
+			
+			model.addAttribute("contactUsList", contactUsList);
+			model.addAttribute("maxPage", 5);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "item/itemContactUs";
+	}
+	
+	//제휴문의 등록 페이지
+	@GetMapping(value = "/camping/contact/reg")
+	public String itemContactUs(Model model) {
+		model.addAttribute("contactUsDto", new ContactUsDto());
+		
+		return "item/itemContactUsReg";
 	} 
+	
+	//제휴문의 등록하기
+	@PostMapping(value = "/camping/contact/reg")
+	public String contactUs (@Valid ContactUsDto contactUsDto, BindingResult bindingResult, Model model, 
+			                 @RequestParam("contactUsImgFile") List<MultipartFile> contactUsImgFileList) {
+		
+		
+		if(bindingResult.hasErrors()) {
+			return "item/itemContactUsReg";
+		}
+
+		if(contactUsImgFileList.get(0).isEmpty()) {
+			model.addAttribute("errorMessage", "캠핑장 대표 이미지는 필수 첨부입니다.");
+			return "item/itemContactUsReg";
+		}
+		
+		try {
+			contactUsService.saveContactUs(contactUsDto, contactUsImgFileList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMessage", "상품등록 중 에러가 발생했습니다.");
+			return "item/itemContactUsReg";
+		}
+		
+		return "redirect:/";
+	}
+	
+	//제휴문의 관리페이지
+	@GetMapping(value = {"/admin/camping/contact", "/admin/camping/contact{page}"})
+	public String adminContactUsList(ContactSearchDto contactSearchDto, Model model, @PathVariable("page") Optional<Integer> page) {
+
+		try {
+			Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+			Page<ContactUs> contactUsList = contactUsService.getAdminContactUsList(contactSearchDto, pageable);
+			
+			model.addAttribute("contactUsList", contactUsList);
+			model.addAttribute("maxPage", 5);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "admin/adminContactUs";
+	}
 }

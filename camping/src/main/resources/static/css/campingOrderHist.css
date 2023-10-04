@@ -67,6 +67,12 @@ a {
 	 background-color: #ED6D1A;
 	 margin: 20px auto;
 }
+
+.hist-box {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
 .rvItem-wrap {
 	height: 350px;
 	border: 1px solid #ddd;
@@ -106,12 +112,13 @@ a {
 	border: 0;
 }
 
-.delete-btn {
-	margin-top: 20px;
-	background-color: #ED6D1A;
-	color: #fff;
-	font-weight: bold;
-	border: 0;
+.rvCancel-btn:active {
+	background-color: #fff !important;
+	color: #ED6D1A !important;
+	border: 1px solid #aaa !important;
+	font-weight: bold !important;
+	outline: none !important;
+	box-shadow: none !important;
 }
 
 .rvCancel-btn:hover{
@@ -121,6 +128,14 @@ a {
 	border: 1px solid #aaa;
 }
 
+.delete-btn {
+	margin-top: 20px;
+	background-color: #ED6D1A;
+	color: #fff;
+	font-weight: bold;
+	border: 0;
+}
+
 .delete-btn:hover {
 	background-color: #fff;
 	color: #ED6D1A;
@@ -128,7 +143,23 @@ a {
 	border: 1px solid #aaa;
 }
 
+.delete-btn:active,
+.delete-btn:focus {
+	background-color: #fff !important;
+	color: #ED6D1A !important;
+	border: 1px solid #aaa !important;
+	font-weight: bold !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
 .page{
 	margin-top: 50px;
-	margin-bottom: 30px;
+	margin-bottom: 50px;
+}
+
+.pagination .page-item.active .page-number{
+	background-color: #ED6D1A;
+	color: #fff;
+	border: none;
 }

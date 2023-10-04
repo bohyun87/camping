@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+a {
+	cursor: hand;
+	color: #000;
+	text-decoration: none;
+	font-size: 15px;	
+}
+
+#member{
+	width:100%;
+	margin: 30px auto;
+	text-align: left;
+	font-size: 20px;
+	font-family: 맑은고딕;
+}
+
+.top-menu-line{
+	height : 60px;
+	line-height:60px;
+	background-color: #000;
+}
+
+.top-menu {
+	width:1200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	color: #fff;
+	font-size: 15px;
+}
+
+.top-menu div{
+	width: 1200px;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.top-main{
+	color: #fff;
+	font-size: 15px;
+}
+
+.top-main:hover{
+	text-decoration: none;
+	color: #fff;
+}
+
+.text-black{
+	color:#ED6D1A; 
+}
+
+#title{
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 100px;
+	margin-bottom: 60px;
+}
+
+#title h1 {
+	font-family: 맑은고딕;
+	font-weight: bolder;	
+}
+
+.titleBox{
+	 width: 80px;
+	 height: 8px;
+	 background-color: #ED6D1A;
+	 margin: 20px auto;
+}
+
+.reg-btn {
+	float: right;
+	margin-bottom: 25px;
+	background-color: #ED6D1A;
+	border: 0;
+	padding: 8px;
+	color: #fff;
+	border-radius: 5px;
+}
+
+.reg-btn:focus,
+.reg-btn:active {
+	outline: none;
+	box-shadow: none;
+}
+
+.table-flex{
+	display: flex;
+}
+
+form {
+	margin-top : 30px;
+	margin-bottom: 80px;
+	justify-content: center;
+}
+
+form table th,
+form tbody tr{
+	text-align: center;
+}
+
+table {
+	border-bottom: 1.5px solid #ddd;
+	margin-bottom: 50px !important;
+}
+
+.pagination .page-item.active .page-link{
+	color: #fff;
+	background-color: #ED6D1A;
+	border-color: #ED6D1A;
+}
+
+.pagination .page-item:hover .page-link {
+	cursor: pointer;
+}
+
+.search {
+	margin-bottom: 50px;
+}
+
+.search-btn{
+	background-color: #ED6D1A;
+	color: #fff;
+	border: 0;
+}
+
+.search-btn:focus,
+.search-btn:active,
+.search-btn:hover {
+	color: #fff;
+	background-color: #ED6D1A !important;
+	border: 0;
+	outline: none !important;
+	box-shadow: none !important;
+}

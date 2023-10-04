@@ -14,7 +14,7 @@
 	  }
 	});
 	
-	$('.input-group.date').datepicker({format: "dd.mm.yyyy"});
+	//$('.input-group.date').datepicker({format: "dd.mm.yyyy"});
 	
 
 	$('.filters ul li').click(function(){
