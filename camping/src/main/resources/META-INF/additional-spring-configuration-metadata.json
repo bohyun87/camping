@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "spring.jpa.hibernate.jdbc.time_zone",
+  "type": "java.lang.String",
+  "description": "A description for 'spring.jpa.hibernate.jdbc.time_zone'"
+}]}

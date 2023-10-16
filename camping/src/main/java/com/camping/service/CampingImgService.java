@@ -1,5 +1,6 @@
 package com.camping.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
@@ -18,8 +19,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CampingImgService {
 	
-	private String campingImgLocation = "C:/camping/item";
-	private String siteImgLocation = "C:/camping/item";
+	
+	@Value("${campingImgLocation}")
+	private String campingImgLocation;
+	
 	private final CampingImgRepository campingImgRepository;
 	private final SiteImgRepository siteImgRepository;
 	private final FileService fileService;
@@ -66,7 +69,7 @@ public class CampingImgService {
 		String imgUrl = "";
 		
 		if(!StringUtils.isEmpty(oriImgName)) {
-			imgName = fileService.uploadFile(siteImgLocation, oriImgName, siteImgFileList.getBytes());
+			imgName = fileService.uploadFile(campingImgLocation, oriImgName, siteImgFileList.getBytes());
 			imgUrl = "/images/item/" + imgName;
 		}
 		

@@ -3,6 +3,7 @@ package com.camping.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,7 +24,6 @@ import com.camping.entity.Camping;
 import com.camping.entity.CampingImg;
 import com.camping.entity.CampingSite;
 import com.camping.entity.CampingSiteImg;
-import com.camping.repository.AvailableDateRepository;
 import com.camping.repository.CampingImgRepository;
 import com.camping.repository.CampingRepository;
 import com.camping.repository.SiteImgRepository;
@@ -45,7 +45,6 @@ public class CampingService {
 	
 	private final CampingImgService campingImgService;
 	
-	private final AvailableDateRepository availableDateRepository;
 	
 	//camping 테이블 상품등록
 	public Long saveCamping(CampingFormDto campingFormDto, List<MultipartFile> campingImgFileLsit) throws Exception {

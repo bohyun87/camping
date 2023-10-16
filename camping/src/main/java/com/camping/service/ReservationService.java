@@ -21,7 +21,6 @@ import com.camping.entity.CampingSiteImg;
 import com.camping.entity.Member;
 import com.camping.entity.Reservation;
 import com.camping.entity.ReservationItem;
-import com.camping.repository.AvailableDateRepository;
 import com.camping.repository.CampingImgRepository;
 import com.camping.repository.CampingRepository;
 import com.camping.repository.MemberRepository;
@@ -45,7 +44,6 @@ public class ReservationService {
 	
 	private final MemberRepository memberRepository;
 	private final ReservationRepository reservationRepository;
-	private final AvailableDateRepository avilableDateRepository;
 
 	
 	//예약하기
