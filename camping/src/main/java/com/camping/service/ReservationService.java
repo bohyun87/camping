@@ -13,7 +13,6 @@ import org.thymeleaf.util.StringUtils;
 import com.camping.dto.ReservationDto;
 import com.camping.dto.ReservationHistDto;
 import com.camping.dto.ReservationItemDto;
-import com.camping.entity.AvailableDate;
 import com.camping.entity.Camping;
 import com.camping.entity.CampingImg;
 import com.camping.entity.CampingSite;

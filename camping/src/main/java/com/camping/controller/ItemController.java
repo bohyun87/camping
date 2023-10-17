@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.camping.auth.PrincipalDetails;
-import com.camping.dto.AvailableDateDto;
 import com.camping.dto.CampingFormDto;
 import com.camping.dto.CampingListDto;
 import com.camping.dto.ContactSearchDto;

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.camping.dto.AvailableDateDto;
 import com.camping.dto.CampingFormDto;
 import com.camping.dto.CampingImgDto;
 import com.camping.dto.CampingListDto;
@@ -19,7 +18,6 @@ import com.camping.dto.ItemSearchDto;
 import com.camping.dto.MainCampingDto;
 import com.camping.dto.SiteDto;
 import com.camping.dto.SiteImgDto;
-import com.camping.entity.AvailableDate;
 import com.camping.entity.Camping;
 import com.camping.entity.CampingImg;
 import com.camping.entity.CampingSite;

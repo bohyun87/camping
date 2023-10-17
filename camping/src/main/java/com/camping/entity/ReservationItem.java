@@ -44,9 +44,6 @@ public class ReservationItem {
 	@JoinColumn(name="site_id")
 	private CampingSite campingSite;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "available_date_id")
-	private AvailableDate availableDate;
 	
 	public static ReservationItem createReservationItem(Camping camping, CampingSite site, int price, int rvCount, String rvCheckinDate, String rvCheckoutDate, 
 					int rvAdultCount, int rvChildCount, int rvCarCount, String rvOption) {
