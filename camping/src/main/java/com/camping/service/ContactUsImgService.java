@@ -32,7 +32,7 @@ public class ContactUsImgService {
 		
 		if(!StringUtils.isEmpty(oriImgName)) {
 			contactImgName = fileService.uploadFile(contactImgLocation, oriImgName, contactUsImgFile.getBytes());
-			imgUrl = "/images/contactUs/" + contactImgName;
+			imgUrl = "/image/contactUs/" + contactImgName;
 		}
 		
 		contactUsImg.updateContactUsImg(oriImgName, contactImgName, imgUrl);
@@ -50,7 +50,7 @@ public class ContactUsImgService {
 			
 			String oriImgName = contactUsImgFile.getOriginalFilename();
 			String contactImgName = fileService.uploadFile(contactImgLocation, oriImgName, contactUsImgFile.getBytes());
-			String imgUrl = "/images/contactUs/" + contactImgName;
+			String imgUrl = "/image/contactUs/" + contactImgName;
 			
 			savedContactUsImg.updateContactUsImg(oriImgName, contactImgName, imgUrl);
 		}

@@ -35,7 +35,7 @@ public class CampingImgService {
 		
 		if(!StringUtils.isEmpty(oriImgName)) {
 			imgName = fileService.uploadFile(campingImgLocation, oriImgName, campingImgFile.getBytes());
-			imgUrl = "/images/item/" + imgName;
+			imgUrl = "/image/item/" + imgName;
 		}
 		
 		campingImg.updateCampingImg(oriImgName, imgName, imgUrl);
@@ -55,7 +55,7 @@ public class CampingImgService {
 			
 			String oriImgName = campingImgFile.getOriginalFilename();
 			String imgName = fileService.uploadFile(campingImgLocation, oriImgName, campingImgFile.getBytes());
-			String imgUrl = "/images/item" + imgName;
+			String imgUrl = "/image/item" + imgName;
 			
 			savedCampingImg.updateCampingImg(oriImgName, imgName, imgUrl);
 		}
@@ -70,7 +70,7 @@ public class CampingImgService {
 		
 		if(!StringUtils.isEmpty(oriImgName)) {
 			imgName = fileService.uploadFile(campingImgLocation, oriImgName, siteImgFileList.getBytes());
-			imgUrl = "/images/item/" + imgName;
+			imgUrl = "/image/item/" + imgName;
 		}
 		
 		siteImg.updateSiteImg(oriImgName, imgName, imgUrl);
@@ -90,7 +90,7 @@ public class CampingImgService {
 			
 			String oriImgName = siteImgFile.getOriginalFilename();
 			String imgName = fileService.uploadFile(campingImgLocation, oriImgName, siteImgFile.getBytes());
-			String imgUrl = "/images/item/" + imgName;
+			String imgUrl = "/image/item/" + imgName;
 			
 			savedSiteImg.updateSiteImg(oriImgName, imgName, imgUrl);
 		}
