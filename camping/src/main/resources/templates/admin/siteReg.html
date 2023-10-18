@@ -76,7 +76,7 @@
 						<div class="form-group row">
 							<div class="col-md-12">
 								<label th:for="price" class="text-black col-md-2" >가격</label>
-								<input type="text" class="form-control col-md-10" th:field="*{price}" placeholder="가격 입력" onkeyup="inputNumberFormat(this)">			
+								<input type="text" class="form-control col-md-10" th:field="*{price}" placeholder="가격 입력" >			
 							</div>
 							<div class="fieldError col-md-12">
 								<p class="col-md-2"></p>
@@ -276,7 +276,7 @@
 		
 						<div class="form-group submit">
 							<div class="col-md-12 d-flex justify-content-center">
-								<button type="button" onclick="beforeSubmit()" class="btn btn-primary mb-3" style="width:150px;">사이트등록</button>
+								<button type="button" onclick="submit()" class="btn btn-primary mb-3" style="width:150px;">사이트등록</button>
 							</div>
 						</div>
 									
